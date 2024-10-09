@@ -6,7 +6,7 @@ using UnityEngine;
 public class AirState : State
 {
 
-    protected PlayerMovement input => core.input;
+    public PlayerMovement input;
     public override void Enter()
     {
         anim.Play("Jump");

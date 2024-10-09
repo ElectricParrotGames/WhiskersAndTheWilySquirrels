@@ -6,7 +6,6 @@ public abstract class Core : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Animator anim;
-    public PlayerMovement input;
     public GroundSensor groundSensor;
 
     public StateMachine machine;
