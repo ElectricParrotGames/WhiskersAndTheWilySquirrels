@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 1165426632987856208}
   - component: {fileID: 1930899836616383550}
   - component: {fileID: 1571111152476625842}
+  - component: {fileID: 8372880139895995499}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -296,9 +297,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b38b1632f27b824ca984c4c91dac114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1165426632987856208}
+  anim: {fileID: 1930899836616383550}
+  input: {fileID: 1571111152476625842}
+  groundSensor: {fileID: 8372880139895995499}
   airState: {fileID: 1893116777275830492}
   runState: {fileID: 4869288412840751965}
   idleState: {fileID: 1795325984789586839}
+--- !u!114 &8372880139895995499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259570600863648107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c95093af1262a4894687ace88b7e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   groundCheck: {fileID: 4833968411375607185}
   groundMask:
     serializedVersion: 2

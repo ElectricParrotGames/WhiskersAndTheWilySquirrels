@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IdleState : State
 {
+
+    protected PlayerMovement input => core.input;
     public override void Enter()
     {
         anim.Play("Idle1");
@@ -11,7 +13,7 @@ public class IdleState : State
 
     public override void Do()
     {
-        if(!input.isGrounded || input.xInput != 0){
+        if(!core.groundSensor || input.xInput != 0){
             isComplete = true;
         }
     }

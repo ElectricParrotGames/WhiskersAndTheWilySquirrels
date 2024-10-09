@@ -11,7 +11,6 @@ public abstract class State : MonoBehaviour
 
     protected Rigidbody2D rb => core.rb;
     protected Animator anim => core.anim;
-    protected PlayerMovement input => core.input;
     protected Core core;
 
     public virtual void Enter() { }

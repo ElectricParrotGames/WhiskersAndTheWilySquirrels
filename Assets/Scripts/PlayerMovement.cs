@@ -16,16 +16,11 @@ public class PlayerMovement : Core
     public float maxSpeed { get; private set; }
     public float jumpSpeed { get; private set; }
 
-    public bool isGrounded { get; private set; }
-    public BoxCollider2D groundCheck;
-    public LayerMask groundMask;
-
     // Start is called before the first frame update
     void Start()
     {
         maxSpeed = 1f;
         jumpSpeed = 3f;
-        isGrounded = false;
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -41,7 +36,6 @@ public class PlayerMovement : Core
         GetInput();
         FaceInput();
         Move();
-        CheckGround();
         SelectState();
     }
     private void FixedUpdate()
@@ -57,7 +51,7 @@ public class PlayerMovement : Core
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && groundSensor.isGrounded)
         { 
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
@@ -73,7 +67,7 @@ public class PlayerMovement : Core
     {
         State oldState = machine.state;
 
-        if (isGrounded)
+        if (groundSensor.isGrounded)
         {
             if (xInput == 0)
             {
@@ -99,8 +93,5 @@ public class PlayerMovement : Core
         }
     }
 
-    void CheckGround()
-    {
-        isGrounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
-    }
+    
 }

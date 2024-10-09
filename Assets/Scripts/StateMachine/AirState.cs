@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AirState : State
 {
+
+    protected PlayerMovement input => core.input;
     public override void Enter()
     {
         anim.Play("Jump");
@@ -17,7 +19,7 @@ public class AirState : State
         anim.Play("Jump", 0, time);
         anim.speed = 0;
 
-        if (input.isGrounded)
+        if (core.groundSensor.isGrounded)
         {
             isComplete = true;
         }

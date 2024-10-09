@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RunState : State
 {
+
+    protected PlayerMovement input => core.input;
     public override void Enter()
     {
         anim.Play("Walk");
@@ -15,7 +17,7 @@ public class RunState : State
         anim.speed = Helpers.Map(input.maxSpeed, 0, 1, 0, 1f, true);
 
 
-        if(!input.isGrounded || input.xInput == 0)
+        if(!core.groundSensor.isGrounded || input.xInput == 0)
         {
             isComplete = true;
         }
