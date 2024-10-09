@@ -16,6 +16,8 @@ public class PlayerMovement : Core
     public float maxSpeed { get; private set; }
     public float jumpSpeed { get; private set; }
 
+    private bool canPassThrough = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,11 +58,16 @@ public class PlayerMovement : Core
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
 
+        if (yInput <0 && canPassThrough){
+            Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"),false);
+
+        }
     }
 
     void GetInput()
     {
         xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
     }
 
     void SelectState()
@@ -93,5 +100,20 @@ public class PlayerMovement : Core
         }
     }
 
-    
+    //Passthrough related
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Platform"))
+        {
+            canPassThrough = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Platform"))
+        {
+            canPassThrough = false;
+        }
+    }
 }

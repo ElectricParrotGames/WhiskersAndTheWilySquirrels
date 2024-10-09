@@ -299,7 +299,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1165426632987856208}
   anim: {fileID: 1930899836616383550}
-  input: {fileID: 1571111152476625842}
   groundSensor: {fileID: 8372880139895995499}
   airState: {fileID: 1893116777275830492}
   runState: {fileID: 4869288412840751965}
@@ -320,6 +319,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2928261415300248488
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 592c1da412fc5484385a3f9a357ed930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 0}
 --- !u!1 &3756353087330642835
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c6935977e8148449c7eeb4bc34d5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 0}
 --- !u!1 &8537385214104735363
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,3 +456,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e7a409d081b454185e00a573fde653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 0}

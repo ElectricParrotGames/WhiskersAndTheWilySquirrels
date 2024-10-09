@@ -28,7 +28,7 @@ public class GroundSensor : MonoBehaviour
 
     void CheckGround()
     {
-        isGrounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0 && 
+        isGrounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0 || 
             Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, platformMask).Length > 0;
     }
 }
