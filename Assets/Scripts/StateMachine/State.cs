@@ -4,23 +4,30 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-    protected Rigidbody2D rb;
-    protected Animator anim;
-    protected PlayerMovement input;
+    
     public bool isComplete { get; protected set; }
     protected float startTime;
     public float time => Time.time - startTime;
+
+    protected Rigidbody2D rb => core.rb;
+    protected Animator anim => core.anim;
+    protected PlayerMovement input => core.input;
+    protected Core core;
 
     public virtual void Enter() { }
     public virtual void Do() { }
     public virtual void FixedDo() { }
     public virtual void Exit() { }
 
-    public void Setup(Rigidbody2D _rb, Animator _animator, PlayerMovement _playerMovement)
+    public void SetCore(Core _core)
     {
-        rb = _rb;
-        anim = _animator;
-        input = _playerMovement;
+        core = _core;
+    }
+
+    public void Initialise()
+    {
+        isComplete = false;
+        startTime = Time.time;
     }
 
 }

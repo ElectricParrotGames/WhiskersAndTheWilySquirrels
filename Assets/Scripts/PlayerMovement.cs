@@ -4,15 +4,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Core
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-
     public State airState;
     public State runState;
     public State idleState;
-    State state;
 
     public float xInput { get; private set; }
     public float yInput { get; private set; }
@@ -34,11 +30,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        idleState.Setup(rb, anim, this);
-        airState.Setup(rb, anim, this);
-        runState.Setup(rb, anim, this);
-
-        state = idleState;
+        SetupInstances();
+        machine.Set(idleState);
 
     }
 
@@ -49,11 +42,7 @@ public class PlayerMovement : MonoBehaviour
         FaceInput();
         Move();
         CheckGround();
-        if (state.isComplete)
-        {
-            SelectState();
-        }
-        state.Do();
+        SelectState();
     }
     private void FixedUpdate()
     {
@@ -69,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
+        { 
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
 
@@ -82,22 +71,23 @@ public class PlayerMovement : MonoBehaviour
 
     void SelectState()
     {
+        State oldState = machine.state;
+
         if (isGrounded)
         {
             if (xInput == 0)
             {
-                state = idleState;
+                machine.Set(idleState);
             }
             else
             {
-                state = runState;
+                machine.Set(runState);
             }
         }
         else
         {
-            state = airState;
+            machine.Set(airState);
         }
-        state.Enter();
     }
 
     void FaceInput()
