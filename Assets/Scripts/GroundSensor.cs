@@ -6,6 +6,7 @@ public class GroundSensor : MonoBehaviour
 {
     public BoxCollider2D groundCheck;
     public LayerMask groundMask;
+    public LayerMask platformMask;
     public bool isGrounded { get; private set; }
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class GroundSensor : MonoBehaviour
 
     void CheckGround()
     {
-        isGrounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
+        isGrounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0 && 
+            Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, platformMask).Length > 0;
     }
 }
