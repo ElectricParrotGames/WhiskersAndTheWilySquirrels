@@ -2,17 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patrol : MonoBehaviour
+public class Patrol : State
 {
-    // Start is called before the first frame update
-    void Start()
+    public Navigate navigate;
+    public IdleState idle;
+    public Transform anchor1;
+    public Transform anchor2;
+    public override void Enter()
     {
-        
+        GoToNextDestination();
     }
 
-    // Update is called once per frame
-    void Update()
+    void GoToNextDestination()
     {
-        
+        float randomSpot = Random.Range(anchor1.position.x, anchor2.position.x);
+        navigate.destination = new Vector2(randomSpot, core.transform.position.y);
+        Set(navigate, true);
+    }
+
+    public override void Do()
+    {
+        if (machine.state == navigate)
+        {
+            if (navigate.isComplete)
+            {
+                Set(idle, true);
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+        }
+        else
+        {
+            if(machine.state.time > 1)
+            {
+                GoToNextDestination();
+            }
+        }
+    }
+
+    public override void FixedDo()
+    {
+
+    }
+    public override void Exit()
+    {
+
     }
 }

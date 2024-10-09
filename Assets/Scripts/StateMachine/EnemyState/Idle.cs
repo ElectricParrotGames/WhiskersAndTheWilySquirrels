@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Idle : MonoBehaviour
+public class Idle : State
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyController input;
+    public override void Enter()
     {
-        
+        anim.Play("Idle");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Do()
     {
-        
+        if (!core.groundSensor)
+        {
+            isComplete = true;
+        }
+    }
+
+    public override void FixedDo()
+    {
+
+    }
+    public override void Exit()
+    {
+
     }
 }

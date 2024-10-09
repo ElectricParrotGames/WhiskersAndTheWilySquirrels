@@ -10,6 +10,13 @@ public abstract class Core : MonoBehaviour
 
     public StateMachine machine;
 
+    public State state => machine.state;
+
+    protected void Set(State newState, bool forceReset = false)
+    {
+        machine.Set(newState, forceReset);
+    }
+
     public void SetupInstances()
     {
         machine = new StateMachine();

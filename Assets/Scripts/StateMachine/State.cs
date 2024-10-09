@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class State : MonoBehaviour
@@ -13,18 +14,41 @@ public abstract class State : MonoBehaviour
     protected Animator anim => core.anim;
     protected Core core;
 
-    public virtual void Enter() { }
-    public virtual void Do() { }
-    public virtual void FixedDo() { }
-    public virtual void Exit() { }
+    public StateMachine machine;
+
+    public StateMachine parent;
+    public State state => machine.state;
+
+    protected void Set(State newState, bool forceReset = false)
+    {
+        machine.Set(newState, forceReset);
+    }
 
     public void SetCore(Core _core)
     {
         core = _core;
     }
 
-    public void Initialise()
+    public virtual void Enter() { }
+    public virtual void Do() { }
+    public virtual void FixedDo() { }
+    public virtual void Exit() { }
+
+    public void DoBranch()
     {
+        Do();
+        state?.DoBranch();
+    }
+
+    public void FixedDoBranch()
+    {
+        FixedDo();
+        state?.FixedDoBranch();
+    }
+
+    public void Initialise(StateMachine _parent)
+    {
+        parent = _parent;
         isComplete = false;
         startTime = Time.time;
     }
