@@ -16,7 +16,6 @@ public class PlayerMovement : Core
     public float maxSpeed { get; private set; }
     public float jumpSpeed { get; private set; }
 
-    private bool canPassThrough = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +38,7 @@ public class PlayerMovement : Core
         FaceInput();
         Move();
         SelectState();
+
     }
     private void FixedUpdate()
     {
@@ -56,11 +56,6 @@ public class PlayerMovement : Core
         if (Input.GetKeyDown(KeyCode.Space) && groundSensor.isGrounded)
         { 
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        }
-
-        if (yInput <0 && canPassThrough){
-            Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"),false);
-
         }
     }
 
@@ -100,20 +95,5 @@ public class PlayerMovement : Core
         }
     }
 
-    //Passthrough related
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Platform"))
-        {
-            canPassThrough = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Platform"))
-        {
-            canPassThrough = false;
-        }
-    }
+    
 }
