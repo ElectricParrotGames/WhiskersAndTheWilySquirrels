@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Patrol : State
 {
+    private float randomIdleTime;
     public Navigate navigate;
-    public IdleState idle;
-    public Transform anchor1;
-    public Transform anchor2;
+    public Idle idle;
+    public Transform anchorLeft;
+    public Transform anchorRigth;
     public override void Enter()
     {
         GoToNextDestination();
@@ -15,7 +16,8 @@ public class Patrol : State
 
     void GoToNextDestination()
     {
-        float randomSpot = Random.Range(anchor1.position.x, anchor2.position.x);
+        randomIdleTime = Random.Range(0.5f, 1.5f);
+        float randomSpot = Random.Range(anchorLeft.position.x, anchorRigth.position.x);
         navigate.destination = new Vector2(randomSpot, core.transform.position.y);
         Set(navigate, true);
     }
@@ -32,7 +34,7 @@ public class Patrol : State
         }
         else
         {
-            if(machine.state.time > 1)
+            if(machine.state.time > randomIdleTime)
             {
                 GoToNextDestination();
             }

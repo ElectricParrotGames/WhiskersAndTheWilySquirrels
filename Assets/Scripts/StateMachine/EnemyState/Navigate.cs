@@ -7,11 +7,11 @@ public class Navigate : State
     public Vector2 destination;
     public float speed = 1f;
     public float threshold = 0.1f;
-    public State animation;
+    public State animationState;
 
     public override void Enter()
     {
-        Set(animation, true);
+        Set(animationState, true);
     }
 
     public override void Do()

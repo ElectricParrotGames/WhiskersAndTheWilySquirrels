@@ -10,9 +10,11 @@ public class StateMachine
     {
         if(state != newState || forceReset)
         {
-            state?.Exit();
+            if (state != null) { 
+                state.Exit();
+            }
             state = newState;
-            state.Initialise();
+            state.Initialise(state.machine);
             state.Enter();
         }
     }

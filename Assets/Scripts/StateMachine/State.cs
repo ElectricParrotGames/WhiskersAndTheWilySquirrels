@@ -26,6 +26,7 @@ public abstract class State : MonoBehaviour
 
     public void SetCore(Core _core)
     {
+        machine = new StateMachine();
         core = _core;
     }
 
@@ -37,13 +38,21 @@ public abstract class State : MonoBehaviour
     public void DoBranch()
     {
         Do();
-        state?.DoBranch();
+        if (state != null)
+        {
+            state.DoBranch();
+        }
+        
     }
 
     public void FixedDoBranch()
     {
         FixedDo();
-        state?.FixedDoBranch();
+        if(state != null)
+        {
+            state.FixedDoBranch();
+        }
+        
     }
 
     public void Initialise(StateMachine _parent)

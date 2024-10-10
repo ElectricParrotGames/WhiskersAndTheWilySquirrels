@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : Core
 {
     public Patrol patrol;
+    public Collect collect;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,19 @@ public class EnemyController : Core
     {
         if (state.isComplete)
         {
+            if(state == collect)
+            {
+                Set(patrol);
+            }
+        }
+        if(state == patrol)
+        {
+            collect.CheckForTarget();
 
+            if(collect.target != null)
+            {
+                Set(collect);
+            }
         }
 
         state.DoBranch();

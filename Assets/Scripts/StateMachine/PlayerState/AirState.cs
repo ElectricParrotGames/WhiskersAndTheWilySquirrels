@@ -15,7 +15,7 @@ public class AirState : State
     public override void Do()
     {
 
-        float time = Helpers.Map(rb.velocity.y, input.jumpSpeed, -input.jumpSpeed, 0, 1, true);
+        float time = Helpers.Map(rb.velocity.y, -input.jumpSpeed, input.jumpSpeed, 0, 1, true);
         anim.Play("Jump", 0, time);
         anim.speed = 0;
 
