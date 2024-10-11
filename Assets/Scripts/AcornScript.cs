@@ -22,7 +22,7 @@ public class AcornScript : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        if(collisionGameObject.CompareTag("Platform") && GetComponent<Rigidbody2D>().velocity.y <= 0)
+        if(collisionGameObject.CompareTag("Platform") && GetComponent<Rigidbody2D>().velocity.y <= 0.2)
         {
             Destroy(this.gameObject);
             return;
