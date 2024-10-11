@@ -9,6 +9,7 @@ TagManager:
   - Catnip
   - Ground
   - Projectile
+  - HurtHitbox
   layers:
   - Default
   - TransparentFX
