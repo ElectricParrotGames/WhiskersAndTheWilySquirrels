@@ -7,7 +7,9 @@ public class EnemyController : Core
     public Patrol patrol;
     public Collect collect;
     public Hurt hurt;
+    public Attack attack;
     public bool isHurt = false;
+    public bool hasPlayerTarget = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +21,16 @@ public class EnemyController : Core
     // Update is called once per frame
     void Update()
     {
+
         if (state.isComplete)
         {
             if(state == collect)
             {
+                Set(patrol);
+            }
+            if(state == attack)
+            {
+                hasPlayerTarget = false;
                 Set(patrol);
             }
         }
@@ -35,9 +43,14 @@ public class EnemyController : Core
                 Set(collect);
             }
         }
+        if (hasPlayerTarget)
+        {
+            Set(attack);
+        }
+
         if (isHurt)
         {
-            Set(hurt);
+            Set(hurt,true);
         }
 
         state.DoBranch();
