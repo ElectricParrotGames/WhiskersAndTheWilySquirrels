@@ -9,22 +9,24 @@ public class AirState : State
     public PlayerMovement input;
     public override void Enter()
     {
-        anim.Play("Jump");
+        if(rb.velocity.y >= 0)
+        {
+            anim.Play("Jump");
+            anim.speed = 0.5f;
+        }
+        else
+        {
+            anim.Play("Fall");
+            anim.speed = 0.5f;
+        }
     }
 
     public override void Do()
     {
-
-        float time = Helpers.Map(rb.velocity.y, -input.jumpSpeed, input.jumpSpeed, 0, 1, true);
-        anim.Play("Jump", 0, time);
-        anim.speed = 0;
-
         if (core.groundSensor.isGrounded)
         {
             isComplete = true;
         }
-
-
     }
 
     public override void FixedDo()

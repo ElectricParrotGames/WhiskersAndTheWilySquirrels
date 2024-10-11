@@ -16,6 +16,8 @@ public class PlayerMovement : Core
     public float maxSpeed { get; private set; }
     public float jumpSpeed { get; private set; }
 
+    private float yThreshold = 0.2f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +71,7 @@ public class PlayerMovement : Core
     {
         State oldState = machine.state;
 
-        if (groundSensor.isGrounded)
+        if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
         {
             if (xInput == 0)
             {
