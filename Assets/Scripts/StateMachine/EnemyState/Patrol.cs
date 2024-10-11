@@ -9,6 +9,13 @@ public class Patrol : State
     public Idle idle;
     public Transform anchorLeft;
     public Transform anchorRigth;
+    public bool hasAnchor;
+
+    private void Start()
+    {
+        hasAnchor = (anchorLeft != null && anchorRigth != null);
+        Debug.Log(hasAnchor);
+    }
     public override void Enter()
     {
         GoToNextDestination();
@@ -16,14 +23,26 @@ public class Patrol : State
 
     void GoToNextDestination()
     {
-        randomIdleTime = Random.Range(0.5f, 1.5f);
-        float randomSpot = Random.Range(anchorLeft.position.x, anchorRigth.position.x);
-        navigate.destination = new Vector2(randomSpot, core.transform.position.y);
+        float randomSpot;
+        if (!hasAnchor)
+        {
+            randomIdleTime = Random.Range(5f, 7.5f);
+            randomSpot = Random.Range(core.transform.position.x - 0.1f, core.transform.position.x + 0.1f);
+            navigate.destination = new Vector2(randomSpot, core.transform.position.y);
+        }
+        else
+        {
+            randomIdleTime = Random.Range(0.5f, 1.5f);
+            randomSpot = Random.Range(anchorLeft.position.x, anchorRigth.position.x);
+            navigate.destination = new Vector2(randomSpot, core.transform.position.y);
+        }
+        
         Set(navigate, true);
     }
 
     public override void Do()
     {
+        
         if (machine.state == navigate)
         {
             if (navigate.isComplete)
