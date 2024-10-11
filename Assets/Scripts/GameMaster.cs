@@ -9,10 +9,13 @@ public class GameMaster : MonoBehaviour
     public static GameMaster instance;
     private GameObject[] squirrels;
     private GameObject[] catnips;
+    public int level { get; private set; } = 0;
 
     private void Awake()
     {
+        DontDestroyOnLoad(transform.gameObject);
         instance = this;
+        level = PlayerPrefs.GetInt("level");
     }
 
     void Start()
@@ -33,5 +36,10 @@ public class GameMaster : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("level", level);
     }
 }
