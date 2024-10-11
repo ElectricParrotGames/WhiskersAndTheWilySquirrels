@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,7 +17,9 @@ public class PlayerMovement : Core
     public float maxSpeed { get; private set; }
     public float jumpSpeed { get; private set; }
 
+
     private float yThreshold = 0.2f;
+
 
 
     // Start is called before the first frame update
@@ -28,6 +31,8 @@ public class PlayerMovement : Core
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+     
+
         SetupInstances();
         machine.Set(idleState);
 
@@ -36,15 +41,20 @@ public class PlayerMovement : Core
     // Update is called once per frame
     void Update()
     {
+
         GetInput();
         FaceInput();
         Move();
         SelectState();
+        
 
     }
     private void FixedUpdate()
     {
-        
+        if (yInput < 0)
+        {
+            FallThroughPlatform();
+        }
     }
 
     void Move()
@@ -59,12 +69,14 @@ public class PlayerMovement : Core
         { 
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
+        
     }
 
+    
     void GetInput()
     {
         xInput = Input.GetAxis("Horizontal");
-        yInput = Input.GetAxis("Vertical");
+        yInput = Input.GetAxisRaw("Vertical");
     }
 
     void SelectState()
@@ -97,5 +109,15 @@ public class PlayerMovement : Core
         }
     }
 
-    
+    private void FallThroughPlatform()
+    {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
+        StartCoroutine(ResetLayerCollision());
+    }
+
+    private IEnumerator ResetLayerCollision()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
+    }
 }
