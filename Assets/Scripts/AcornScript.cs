@@ -17,7 +17,12 @@ public class AcornScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collisionGameObject = collision.gameObject;
-        if (collisionGameObject.CompareTag("Ground") || collisionGameObject.CompareTag("Platform"))
+        if (collisionGameObject.CompareTag("Ground"))
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        if(collisionGameObject.CompareTag("Platform") && GetComponent<Rigidbody2D>().velocity.y < 0)
         {
             Destroy(this.gameObject);
             return;
