@@ -7,6 +7,7 @@ public class Collect : State
     public List<Transform> catnips;
     public Transform target;
     public Navigate navigate;
+    public Take take;
     public Idle idle;
     public float collectRadius;
     public float vision = 1f;
@@ -25,7 +26,7 @@ public class Collect : State
             {
                 target.gameObject.SetActive(false);
                 rb.velocity = new Vector2(0, rb.velocity.y);
-                Set(idle, true);
+                Set(take, true);
                 return;
             }
             else if (!InVision(target.position))
