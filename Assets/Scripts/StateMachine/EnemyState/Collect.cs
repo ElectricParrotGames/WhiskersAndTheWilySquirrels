@@ -11,6 +11,7 @@ public class Collect : State
     public Idle idle;
     public float collectRadius;
     public float vision = 1f;
+    public Transform mouth;
 
     public override void Enter()
     {
@@ -24,6 +25,7 @@ public class Collect : State
         {
             if (CloseEnough(target.position))
             {
+                target.SetParent(mouth);
                 target.gameObject.SetActive(false);
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 Set(take, true);
