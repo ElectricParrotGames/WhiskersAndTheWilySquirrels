@@ -10,8 +10,8 @@ public class Collect : State
     public Take take;
     public Idle idle;
     public float collectRadius;
-    public float vision = 1f;
     public Transform mouth;
+    public BoxCollider2D visionCollider;
 
     public override void Enter()
     {
@@ -74,7 +74,7 @@ public class Collect : State
 
     public bool InVision(Vector2 targetPos)
     {
-        return Vector2.Distance(core.transform.position, targetPos) < vision;
+        return visionCollider.OverlapPoint(targetPos);
     }
 
     public void CheckForTarget()
