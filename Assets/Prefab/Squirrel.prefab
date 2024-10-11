@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
   speed: 0.5
-  threshold: 0.1
+  threshold: 0.15
   animationState: {fileID: 4330564346975924614}
 --- !u!1 &2282402620499901737
 GameObject:
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
   speed: 1.5
-  threshold: 0.1
+  threshold: 0.15
   animationState: {fileID: 4330564346975924614}
 --- !u!1 &2663042287206245835
 GameObject:
@@ -273,9 +273,9 @@ GameObject:
   - component: {fileID: 2148608454621856510}
   - component: {fileID: 1650781433224850348}
   - component: {fileID: 2435664490494091666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Squirrel
-  m_TagString: Untagged
+  m_TagString: Squirrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
