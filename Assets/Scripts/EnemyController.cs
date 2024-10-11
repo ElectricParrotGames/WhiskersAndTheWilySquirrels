@@ -6,6 +6,8 @@ public class EnemyController : Core
 {
     public Patrol patrol;
     public Collect collect;
+    public Hurt hurt;
+    public bool isHurt = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,10 @@ public class EnemyController : Core
                 Set(collect);
             }
         }
+        if (isHurt)
+        {
+            Set(hurt);
+        }
 
         state.DoBranch();
     }
@@ -41,4 +47,10 @@ public class EnemyController : Core
     {
         state.FixedDoBranch();
     }
+
+    public void Hurt()
+    {
+        isHurt = true;
+    }
+
 }
