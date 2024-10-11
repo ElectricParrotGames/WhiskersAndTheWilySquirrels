@@ -10,6 +10,10 @@ public class AcornScript : MonoBehaviour
         if (collisionGameObject.CompareTag("Ground") || collisionGameObject.CompareTag("Platform"))
         {
             Destroy(this.gameObject);
+            return;
+        }
+        if (collisionGameObject.CompareTag("Player")){
+            //the player is hurt
         }
     }
 }
