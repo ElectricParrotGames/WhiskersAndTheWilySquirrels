@@ -15,7 +15,9 @@ public class PlayerMovement : Core
     public float yInput { get; private set; }
 
     public float maxSpeed { get; private set; }
+    public float friction = 1f;
     public float jumpSpeed { get; private set; }
+    private bool isPassingThrough = false;
 
 
     private float yThreshold = 0.2f;
@@ -26,7 +28,7 @@ public class PlayerMovement : Core
     void Start()
     {
         maxSpeed = 1f;
-        jumpSpeed = 3f;
+        jumpSpeed = 3.5f;
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -55,12 +57,16 @@ public class PlayerMovement : Core
         {
             FallThroughPlatform();
         }
+
+        if(Mathf.Abs(xInput) < 0.01f && groundSensor.isGrounded && !isPassingThrough){
+            ApplyFriction();
+        }
     }
 
     void Move()
     {
         
-        if(Mathf.Abs(xInput) > 0)
+        if(Mathf.Abs(xInput) > 0.01f)
         {
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
         }
@@ -111,6 +117,7 @@ public class PlayerMovement : Core
 
     private void FallThroughPlatform()
     {
+        isPassingThrough = true;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
         StartCoroutine(ResetLayerCollision());
     }
@@ -118,6 +125,21 @@ public class PlayerMovement : Core
     private IEnumerator ResetLayerCollision()
     {
         yield return new WaitForSeconds(0.5f);
+        isPassingThrough = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
+    }
+    void ApplyFriction()
+    {
+        // Calculate the friction force based on current velocity
+        Vector2 frictionForce = -rb.velocity.normalized * friction;
+
+        // Apply the friction force
+        rb.AddForce(frictionForce);
+
+        // Stop the object if the friction brings it close to zero
+        if (rb.velocity.magnitude < friction)
+        {
+            rb.velocity = Vector2.zero; // Stop movement
+        }
     }
 }
