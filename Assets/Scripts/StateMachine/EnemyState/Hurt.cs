@@ -17,7 +17,7 @@ public class Hurt : State
         timer += Time.deltaTime;
         if(timer >= timeBeforeDisapearing)
         {
-            transform.parent.parent.gameObject.SetActive(false);
+            transform.root.gameObject.SetActive(false);
             //Destroy(transform.parent.parent.gameObject);
         }
     }

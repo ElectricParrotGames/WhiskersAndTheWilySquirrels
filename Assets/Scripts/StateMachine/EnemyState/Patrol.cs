@@ -14,7 +14,6 @@ public class Patrol : State
     private void Start()
     {
         hasAnchor = (anchorLeft != null && anchorRigth != null);
-        Debug.Log(hasAnchor);
     }
     public override void Enter()
     {
@@ -42,9 +41,19 @@ public class Patrol : State
 
     public override void Do()
     {
-        
         if (machine.state == navigate)
         {
+            //if (navigate.detection.wallDetected)
+            //{
+            //    if(transform.root.localScale.x > 0)
+            //    {
+            //        anchorRigth = navigate.detection.wall;
+            //    }
+            //    else
+            //    {
+            //        anchorLeft = navigate.detection.wall;
+            //    }
+            //}
             if (navigate.isComplete)
             {
                 Set(idle, true);

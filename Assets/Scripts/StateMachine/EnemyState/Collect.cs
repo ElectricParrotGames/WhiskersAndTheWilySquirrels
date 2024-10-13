@@ -11,7 +11,7 @@ public class Collect : State
     public Idle idle;
     public float collectRadius;
     public Transform mouth;
-    public BoxCollider2D visionCollider;
+    public CatnipDetection catnipDetection;
 
     public override void Enter()
     {
@@ -72,9 +72,9 @@ public class Collect : State
         return Vector2.Distance(core.transform.position, targetPos) < collectRadius;
     }
 
-    public bool InVision(Vector2 targetPos)
+    public bool InVision(Vector3 targetPos)
     {
-        return visionCollider.OverlapPoint(targetPos);
+        return catnipDetection.IsCatnipAccessible(targetPos);
     }
 
     public void CheckForTarget()

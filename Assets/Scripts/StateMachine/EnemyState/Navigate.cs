@@ -8,6 +8,7 @@ public class Navigate : State
     public float speed = 1f;
     public float threshold = 0.15f;
     public State animationState;
+    public WallDetection detection;
 
     public override void Enter()
     {
@@ -16,7 +17,7 @@ public class Navigate : State
 
     public override void Do()
     {
-        if (Vector2.Distance(core.transform.position, destination) < threshold)
+        if (Vector2.Distance(core.transform.position, destination) < threshold || (detection.wallDetected && detection.IsTargetBehindWall(destination)))
         {
             isComplete = true;
         }
