@@ -20,9 +20,13 @@ public class PlayerMovement : Core
     private bool isPassingThrough = false;
 
 
+    public float yVelocity { get; private set; }
+
     private readonly float yThreshold = 0.2f;
 
     private readonly float passthroughTime = 0.5f;
+
+    private EnemyController enemyController;
 
 
 
@@ -35,7 +39,7 @@ public class PlayerMovement : Core
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-     
+        
 
         SetupInstances();
         machine.Set(idleState);
@@ -47,10 +51,11 @@ public class PlayerMovement : Core
     {
 
         GetInput();
+        GetVelocity();
         FaceInput();
         Move();
         SelectState();
-        
+
 
     }
     private void FixedUpdate()
@@ -60,27 +65,32 @@ public class PlayerMovement : Core
             FallThroughPlatform();
         }
 
-        if(Mathf.Abs(xInput) < 0.01f && groundSensor.isGrounded && !isPassingThrough){
+        if (Mathf.Abs(xInput) < 0.01f && groundSensor.isGrounded && !isPassingThrough)
+        {
             ApplyFriction();
         }
     }
 
     void Move()
     {
-        
-        if(Mathf.Abs(xInput) > 0.01f)
+
+        if (Mathf.Abs(xInput) > 0.01f)
         {
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && groundSensor.isGrounded)
-        { 
+        {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
-        
+
     }
 
-    
+    void GetVelocity()
+    {
+        yVelocity = rb.velocity.y;
+    }
+
     void GetInput()
     {
         xInput = Input.GetAxis("Horizontal");
@@ -111,7 +121,7 @@ public class PlayerMovement : Core
     void FaceInput()
     {
         float direction = Mathf.Sign(xInput);
-        if(xInput != 0)
+        if (xInput != 0)
         {
             transform.localScale = new Vector3(direction, 1, 1);
         }
@@ -142,6 +152,20 @@ public class PlayerMovement : Core
         if (rb.velocity.magnitude < friction)
         {
             rb.velocity = Vector2.zero; // Stop movement
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HurtHitbox"))
+        {
+            enemyController = collision.gameObject.GetComponentInParent<EnemyController>();
+
+            if (yVelocity <= 0)
+            {
+
+                enemyController.Hurt();
+            }
         }
     }
 }

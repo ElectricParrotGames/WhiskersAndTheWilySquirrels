@@ -188,7 +188,6 @@ MonoBehaviour:
   idle: {fileID: 6308361619427025313}
   anchorLeft: {fileID: 0}
   anchorRigth: {fileID: 0}
-  hasAnchor: 0
 --- !u!114 &8998125045552634806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
-  speed: 0.5
-  threshold: 0.15
-  jumpSpeed: 0.1
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
   groundSensor: {fileID: 6948680300065014543}
@@ -258,7 +254,6 @@ MonoBehaviour:
   navigate: {fileID: 1814189305194365965}
   take: {fileID: 8115546545515242161}
   idle: {fileID: 6308361619427025313}
-  collectRadius: 0.2
   mouth: {fileID: 2968980753663633497}
   catnipDetection: {fileID: 4238095744572642837}
 --- !u!114 &1814189305194365965
@@ -274,9 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0}
-  speed: 1.5
-  threshold: 0.15
-  jumpSpeed: 0.1
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
   groundSensor: {fileID: 6948680300065014543}
@@ -545,7 +537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae6f92b250e59942afedef3259c0426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxXSpeed: 2
 --- !u!1 &4411733065915788444
 GameObject:
   m_ObjectHideFlags: 0
