@@ -37,8 +37,8 @@ public class WallDetection : Detection
             WallDetected = true;
             wall = hit.transform;
 
-            hit = Physics2D.Raycast(overHead.position, viewPosition, rayLength, groundMask);
-            CanBeJump = hit.collider == null;
+            RaycastHit2D overHeadHit = Physics2D.Raycast(overHead.position, viewPosition, rayLength, groundMask);
+            CanBeJump = overHeadHit.collider == null;
         }
         else
         {

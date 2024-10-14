@@ -5,7 +5,7 @@ using UnityEngine.Windows;
 
 public class Run : State
 {
-    public float maxXSpeed = 2f;
+    private readonly float maxXSpeed = 2f;
     public override void Enter()
     {
         anim.Play("Run");

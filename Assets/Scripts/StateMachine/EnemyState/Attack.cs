@@ -8,7 +8,7 @@ public class Attack : State
     public GameObject prefabAcorn;
     public Transform nutLauncher;
     public Transform target;
-    private float speed = 5;
+    private readonly float speed = 5;
     private bool canShot;
 
     public override void Enter()

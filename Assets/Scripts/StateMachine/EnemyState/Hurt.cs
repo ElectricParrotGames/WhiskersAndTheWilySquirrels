@@ -6,7 +6,7 @@ public class Hurt : State
 {
     public GameObject mouth;
     private float timer = 0f;
-    private float timeBeforeDisapearing = 2f;
+    private readonly float timeBeforeDisapearing = 2f;
     public override void Enter()
     {
         anim.Play("Death");

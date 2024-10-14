@@ -9,9 +9,14 @@ public class Collect : State
     public Navigate navigate;
     public Take take;
     public Idle idle;
-    public float collectRadius;
+    private readonly float collectRadius = 0.2f;
     public Transform mouth;
     public CatnipDetection catnipDetection;
+
+    private void Start()
+    {
+        navigate.Speed = 1f;
+    }
 
     public override void Enter()
     {

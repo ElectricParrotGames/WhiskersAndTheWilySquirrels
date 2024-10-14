@@ -9,11 +9,12 @@ public class Patrol : State
     public Idle idle;
     public Transform anchorLeft;
     public Transform anchorRigth;
-    public bool hasAnchor;
+    private bool hasAnchor;
 
     private void Start()
     {
         hasAnchor = (anchorLeft != null && anchorRigth != null);
+        navigate.Speed = 0.5f;
     }
     public override void Enter()
     {

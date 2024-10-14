@@ -7,7 +7,7 @@ public class GroundSensor : MonoBehaviour
 {
     //public BoxCollider2D groundCheck;
     public LayerMask groundPlatformMask;
-    private float rayLength = 0.03f;
+    private float rayLength = 0.1f;
     public bool isGrounded { get; private set; }
 
     // Update is called once per frame

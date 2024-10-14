@@ -204,8 +204,10 @@ MonoBehaviour:
   destination: {x: 0, y: 0}
   speed: 0.5
   threshold: 0.15
+  jumpSpeed: 0.1
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
+  groundSensor: {fileID: 6948680300065014543}
 --- !u!1 &2282402620499901737
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,8 +276,10 @@ MonoBehaviour:
   destination: {x: 0, y: 0}
   speed: 1.5
   threshold: 0.15
+  jumpSpeed: 0.1
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
+  groundSensor: {fileID: 6948680300065014543}
 --- !u!1 &2663042287206245835
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,14 +461,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f19d62b495a230d468caa8e47cc77e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallDetected: 0
   wall: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  rayLength: 0.1
   overHead: {fileID: 4876016337282857701}
-  canBeJump: 0
 --- !u!114 &9164411712647896587
 MonoBehaviour:
   m_ObjectHideFlags: 0

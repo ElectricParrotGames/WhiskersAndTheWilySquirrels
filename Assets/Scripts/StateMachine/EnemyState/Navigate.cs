@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Navigate : State
 {
     public Vector2 destination;
-    public float speed = 1f;
-    public float threshold = 0.15f;
+    public float Speed { get; set; }
+    private readonly float threshold = 0.15f;
+    private readonly float jumpSpeed = 50f;
     public State animationState;
     public WallDetection detection;
+    public GroundSensor groundSensor;
 
     public override void Enter()
     {
@@ -17,7 +20,7 @@ public class Navigate : State
 
     public override void Do()
     {
-        if (Vector2.Distance(core.transform.position, destination) < threshold || (detection.WallDetected && detection.IsTargetBehindWall(destination)))
+        if (Mathf.Abs(core.transform.position.x - destination.x) < threshold || (!detection.CanBeJump && detection.IsTargetBehindWall(destination)))
         {
             isComplete = true;
         }
@@ -26,8 +29,14 @@ public class Navigate : State
 
     public override void FixedDo()
     {
-        Vector2 direction = (destination - (Vector2)core.transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
+        float direction = Mathf.Sign(destination.x - core.transform.position.x);
+        rb.velocity = new Vector2(direction * Speed, rb.velocity.y);
+
+        if (groundSensor.isGrounded && detection.CanBeJump)
+        {
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Force);
+
+        }
     }
     public override void Exit()
     {
