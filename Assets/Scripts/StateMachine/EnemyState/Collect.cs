@@ -86,7 +86,7 @@ public class Collect : State
     {
         foreach (Transform catnip in catnips)
         {
-            if (InVision(catnip.position) && catnip.gameObject.activeSelf)
+            if (InVision(catnip.position) && catnip.gameObject.activeSelf && catnip.GetComponent<CatnipScript>().CanBeTake)
             {
                 target = catnip;
                 return;

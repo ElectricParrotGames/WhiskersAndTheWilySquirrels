@@ -33,6 +33,7 @@ public class Hurt : State
             catnip.position = mouth.transform.position;
             catnip.SetParent(null);
             catnip.gameObject.SetActive(true);
+            catnip.GetComponent<CatnipScript>().AsReappear();
 
             Rigidbody2D catnipRb = catnip.GetComponent<Rigidbody2D>();
             catnipRb.velocity = direction * force;
