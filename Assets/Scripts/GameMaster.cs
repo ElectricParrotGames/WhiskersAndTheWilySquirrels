@@ -8,7 +8,7 @@ public class GameMaster : MonoBehaviour
 
     public static GameMaster instance;
     private GameObject[] squirrels;
-    private GameObject[] catnips;
+    private List<Transform> catnips = new List<Transform>();
     public int level { get; private set; } = 0;
 
     private void Awake()
@@ -21,13 +21,20 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         squirrels = GameObject.FindGameObjectsWithTag("Squirrel");
-        catnips = GameObject.FindGameObjectsWithTag("Catnip");
+
+        foreach (var obj in FindObjectsOfType<Transform>(true))
+        {
+            if (obj.CompareTag("Catnip"))
+            {
+                catnips.Add(obj);
+            }
+        }
 
         foreach (GameObject squirrel in squirrels)
         {
-            foreach (GameObject catnip in catnips)
+            foreach (Transform catnip in catnips)
             {
-                squirrel.GetComponentInChildren<Collect>().catnips.Add(catnip.transform);
+                squirrel.GetComponentInChildren<Collect>().catnips.Add(catnip);
             }
             
         }

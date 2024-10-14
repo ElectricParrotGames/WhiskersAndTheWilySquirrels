@@ -15,12 +15,14 @@ public class PlayerMovement : Core
     public float yInput { get; private set; }
 
     public float maxSpeed { get; private set; }
-    public float friction = 1f;
+    private readonly float friction = 1f;
     public float jumpSpeed { get; private set; }
     private bool isPassingThrough = false;
 
 
-    private float yThreshold = 0.2f;
+    private readonly float yThreshold = 0.2f;
+
+    private readonly float passthroughTime = 0.5f;
 
 
 
@@ -124,7 +126,7 @@ public class PlayerMovement : Core
 
     private IEnumerator ResetLayerCollision()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(passthroughTime);
         isPassingThrough = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
     }
