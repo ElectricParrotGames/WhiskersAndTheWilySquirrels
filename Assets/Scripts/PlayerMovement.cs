@@ -19,14 +19,9 @@ public class PlayerMovement : Core
     public float jumpSpeed { get; private set; }
     private bool isPassingThrough = false;
 
-
-    public float yVelocity { get; private set; }
-
     private readonly float yThreshold = 0.2f;
 
     private readonly float passthroughTime = 0.5f;
-
-    private EnemyController enemyController;
 
 
 
@@ -51,7 +46,6 @@ public class PlayerMovement : Core
     {
 
         GetInput();
-        GetVelocity();
         FaceInput();
         Move();
         SelectState();
@@ -84,11 +78,6 @@ public class PlayerMovement : Core
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
 
-    }
-
-    void GetVelocity()
-    {
-        yVelocity = rb.velocity.y;
     }
 
     void GetInput()
@@ -159,12 +148,11 @@ public class PlayerMovement : Core
     {
         if (collision.gameObject.CompareTag("HurtHitbox"))
         {
-            enemyController = collision.gameObject.GetComponentInParent<EnemyController>();
-
-            if (yVelocity <= 0)
+            if (rb.velocity.y < 0)
             {
-
-                enemyController.Hurt();
+                collision.gameObject.GetComponentInParent<EnemyController>().Hurt();
+                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed/2);
+                Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponent<CircleCollider2D>());
             }
         }
     }

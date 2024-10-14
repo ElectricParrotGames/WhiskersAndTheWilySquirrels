@@ -64,6 +64,7 @@ public class EnemyController : Core
     public void Hurt()
     {
         isHurt = true;
+        GetComponentInChildren<BoxCollider2D>().gameObject.SetActive(false);
     }
 
 }
