@@ -22,8 +22,9 @@ public class GroundSensor : MonoBehaviour
         {
             isGrounded = false;
         }
-        Vector2 endPoint = hit.collider ? (Vector2)hit.point : transform.position + Vector3.down * rayLength;
 
+        //DebugLine
+        Vector2 endPoint = hit.collider ? (Vector2)hit.point : transform.position + Vector3.down * rayLength;
         Debug.DrawLine(transform.position, endPoint, Color.gray);
     }
 }

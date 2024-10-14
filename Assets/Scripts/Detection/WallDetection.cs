@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,46 +6,50 @@ using static UnityEngine.UI.Image;
 
 public class WallDetection : Detection
 {
-    public bool wallDetected;
+    public bool WallDetected { get; private set; }
     public Transform wall;
     public LayerMask groundMask;
-    public float rayLength;
+    private readonly float rayLength = 0.1f;
+
+    public Transform overHead;
+    public bool CanBeJump { get; private set; }
 
     void Update()
     {
         UpdateDetection();
-        Vector3 position = transform.root.localScale.x > 0 ? Vector2.right : Vector2.left; 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, position, rayLength, groundMask);
-        if (hit.collider != null)
-        {
-            wallDetected = true;
-            wall = hit.transform;
-        }
-        else
-        {
-            wallDetected = false;
-            wall = null;
-        }
-        Vector2 endPoint = hit.collider ? (Vector2)hit.point : transform.position + position * rayLength;
-
-        Debug.Log(wallDetected);
-        Debug.DrawLine(transform.position, endPoint, Color.green);
+        DetectWallInFront();
     }
+
+    
 
     public bool IsTargetBehindWall(Vector3 targetPos)
     {
-        // Create a ray from the player to the target
         Vector3 directionToTarget = (targetPos - position).normalized;
-
-        // Check if the wall is between the player and the target
         RaycastHit2D hit = Physics2D.Raycast(position, directionToTarget, Vector2.Distance(position, targetPos), groundMask);
+        return hit.collider != null;
+    }
 
-        // If there is a hit and the wall is hit, then the target is behind the wall
+    private void DetectWallInFront()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, viewPosition, rayLength, groundMask);
         if (hit.collider != null)
         {
-            return true;
+            WallDetected = true;
+            wall = hit.transform;
+
+            hit = Physics2D.Raycast(overHead.position, viewPosition, rayLength, groundMask);
+            CanBeJump = hit.collider == null;
+        }
+        else
+        {
+            WallDetected = false;
+            wall = null;
+            CanBeJump = false;
         }
 
-        return false;
+        //DebugLine
+        Vector2 endPoint = hit.collider ? (Vector2)hit.point : transform.position + viewPosition * rayLength;
+        Debug.DrawLine(transform.position, endPoint, Color.green);
     }
+
 }

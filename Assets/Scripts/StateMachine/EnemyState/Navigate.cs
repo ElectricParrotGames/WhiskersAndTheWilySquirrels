@@ -17,7 +17,7 @@ public class Navigate : State
 
     public override void Do()
     {
-        if (Vector2.Distance(core.transform.position, destination) < threshold || (detection.wallDetected && detection.IsTargetBehindWall(destination)))
+        if (Vector2.Distance(core.transform.position, destination) < threshold || (detection.WallDetected && detection.IsTargetBehindWall(destination)))
         {
             isComplete = true;
         }
