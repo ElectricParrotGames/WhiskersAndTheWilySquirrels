@@ -47,6 +47,37 @@ MonoBehaviour:
   groundPlatformMask:
     serializedVersion: 2
     m_Bits: 192
+--- !u!1 &845106047370658450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1656040268440057523}
+  m_Layer: 8
+  m_Name: Pocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1656040268440057523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845106047370658450}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8361465548095441292}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2192594117608123778
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +148,7 @@ Transform:
   m_Children:
   - {fileID: 2979653702787310309}
   - {fileID: 5516208310374841297}
+  - {fileID: 1656040268440057523}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3469659567951842304
@@ -272,7 +304,7 @@ MonoBehaviour:
   airState: {fileID: 1893116777275830492}
   runState: {fileID: 4869288412840751965}
   idleState: {fileID: 1795325984789586839}
-  friction: 1
+  pocket: {fileID: 1656040268440057523}
 --- !u!1 &2928261415300248488
 GameObject:
   m_ObjectHideFlags: 0

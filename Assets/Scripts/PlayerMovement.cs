@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class PlayerMovement : Core
     public State airState;
     public State runState;
     public State idleState;
+
+    public Transform pocket;
+
 
     public float xInput { get; private set; }
     public float yInput { get; private set; }
@@ -34,7 +38,6 @@ public class PlayerMovement : Core
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        
 
         SetupInstances();
         machine.Set(idleState);
@@ -155,5 +158,19 @@ public class PlayerMovement : Core
                 Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponent<CircleCollider2D>());
             }
         }
+
+
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Catnip"))
+        {
+
+            collision.transform.SetParent(pocket);
+            collision.gameObject.SetActive(false);
+
+        }
+    }
+
 }
