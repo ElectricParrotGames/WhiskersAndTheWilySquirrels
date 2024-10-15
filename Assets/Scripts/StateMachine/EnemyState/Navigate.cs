@@ -12,6 +12,7 @@ public class Navigate : State
     public State animationState;
     public WallDetection detection;
     public GroundSensor groundSensor;
+    public FallDetection fallDetection;
 
     public override void Enter()
     {
@@ -20,7 +21,9 @@ public class Navigate : State
 
     public override void Do()
     {
-        if (Mathf.Abs(core.transform.position.x - destination.x) < threshold || (!detection.CanBeJump && detection.IsTargetBehindWall(destination)))
+        if (Mathf.Abs(core.transform.position.x - destination.x) < threshold || 
+            (!detection.CanBeJump && detection.IsTargetBehindWall(destination)) || 
+            !fallDetection.CanFall)
         {
             isComplete = true;
         }

@@ -204,6 +204,7 @@ MonoBehaviour:
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
   groundSensor: {fileID: 6948680300065014543}
+  fallDetection: {fileID: 5074465987317796908}
 --- !u!1 &2282402620499901737
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +273,7 @@ MonoBehaviour:
   animationState: {fileID: 4330564346975924614}
   detection: {fileID: 2355921373811909440}
   groundSensor: {fileID: 6948680300065014543}
+  fallDetection: {fileID: 5074465987317796908}
 --- !u!1 &2663042287206245835
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +403,7 @@ GameObject:
   - component: {fileID: 2355921373811909440}
   - component: {fileID: 9164411712647896587}
   - component: {fileID: 6948680300065014543}
+  - component: {fileID: 5074465987317796908}
   m_Layer: 9
   m_Name: Sensor
   m_TagString: Untagged
@@ -422,6 +425,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4876016337282857701}
+  - {fileID: 5853593686165172688}
   m_Father: {fileID: 2111560022573241260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4238095744572642837
@@ -493,6 +497,22 @@ MonoBehaviour:
   groundPlatformMask:
     serializedVersion: 2
     m_Bits: 192
+--- !u!114 &5074465987317796908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859477856433178316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461f88e72f5030542be13c8564c0600e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundPlatformMask:
+    serializedVersion: 2
+    m_Bits: 64
+  fallDetector: {fileID: 5853593686165172688}
 --- !u!1 &4088387995723818429
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +858,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1df73eb4c323d4eb5d9106cce5dcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7427213556218657209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5853593686165172688}
+  m_Layer: 9
+  m_Name: FallDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5853593686165172688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7427213556218657209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0446, y: -0.0503, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5436458650968631193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8278486349480263545
 GameObject:
   m_ObjectHideFlags: 0
