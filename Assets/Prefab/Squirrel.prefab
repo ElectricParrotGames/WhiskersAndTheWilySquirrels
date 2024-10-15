@@ -390,6 +390,7 @@ MonoBehaviour:
   prefabAcorn: {fileID: 2269874899657084983, guid: 077a7230a7d7ca0449340969acae8ff1, type: 3}
   nutLauncher: {fileID: 8620197018360435292}
   target: {fileID: 0}
+  playerDetection: {fileID: 9164411712647896587}
 --- !u!1 &3859477856433178316
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +798,7 @@ MonoBehaviour:
   collect: {fileID: 1594482576457283223}
   hurt: {fileID: 8013667074926306341}
   attack: {fileID: 8547070779163872427}
+  playerDetection: {fileID: 9164411712647896587}
   isHurt: 0
   hasPlayerTarget: 0
 --- !u!114 &2435664490494091666

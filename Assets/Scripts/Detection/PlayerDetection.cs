@@ -9,16 +9,14 @@ public class PlayerDetection : Detection
     public float playerViewDistance = 1.4f;
     public float fovAngle;
 
-    private float timer = 0f;
-    private float minTime = 3f;
+    public Transform TargetTransform { get; private set; }
+    public bool PlayerInView { get; private set; }
 
     // Update is called once per frame
     void Update()
     {
         UpdateDetection();
-        timer += Time.deltaTime;
 
-        if (timer >= minTime)
         {
             Collider2D[] targetsInViewRadius = Physics2D.OverlapCircleAll(position, playerViewDistance, playerLayerMask);
 
@@ -35,16 +33,15 @@ public class PlayerDetection : Detection
                     // Check if there's an obstacle in the way
                     if (!Physics2D.Raycast(position, directionToTarget, distanceToTarget, groundMask))
                     {
-                        EnemyController scriptEnemy = transform.parent.GetComponent<EnemyController>();
-                        if (!scriptEnemy.hasPlayerTarget)
-                        {
-                            timer = 0;
-                            scriptEnemy.hasPlayerTarget = true;
-                            scriptEnemy.attack.target = target.transform;
-                        }
+                        PlayerInView = true;
+                        TargetTransform = target.transform;
+                        return;
                     }
                 }
             }
+
+            PlayerInView = false;
+            TargetTransform = null;
         }
     }
 

@@ -8,6 +8,7 @@ public class EnemyController : Core
     public Collect collect;
     public Hurt hurt;
     public Attack attack;
+    public PlayerDetection playerDetection;
     public bool isHurt = false;
     public bool hasPlayerTarget = false;
 
@@ -21,7 +22,7 @@ public class EnemyController : Core
     // Update is called once per frame
     void Update()
     {
-
+        
         if (state.isComplete)
         {
             if(state == collect)
@@ -43,12 +44,13 @@ public class EnemyController : Core
                 Set(collect);
             }
         }
-        if (hasPlayerTarget)
+        if (state != attack && playerDetection.PlayerInView)
         {
+            Debug.Log(state);
             Set(attack);
         }
 
-        if (isHurt)
+        if (state != hurt && isHurt)
         {
             Set(hurt,true);
         }

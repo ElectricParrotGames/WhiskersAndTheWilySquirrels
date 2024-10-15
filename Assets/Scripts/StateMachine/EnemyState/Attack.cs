@@ -10,17 +10,38 @@ public class Attack : State
     public Transform target;
     private readonly float speed = 5;
     private bool canShot;
+    public PlayerDetection playerDetection;
+
+    private float timer = 3.5f;
+    private float minTime = 3f;
 
     public override void Enter()
     {
-        anim.Play("Attack");
+        anim.Play("Idle");
         anim.speed = 1;
-        canShot = true;
     }
 
     public override void Do()
     {
-        if (!canShot)
+        target = playerDetection.TargetTransform;
+        timer += Time.deltaTime;
+        if(timer >= minTime)
+        {
+            canShot = true;
+        }
+        if (canShot)
+        {
+            timer = 0f;
+            anim.Play("Attack");
+        }
+        else
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                anim.Play("Idle");
+            }
+        }
+        if(target == null)
         {
             isComplete = true;
         }
@@ -28,12 +49,16 @@ public class Attack : State
 
     public override void FixedDo()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
-        anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        if (canShot)
         {
-            Shot();
-            isComplete = true;
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+        anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                Shot();
+                canShot = false;
+            }
         }
+        
     }
     public override void Exit()
     {
