@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squirrel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4715627411762520793, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -255,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 4715627411762520793, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
       propertyPath: m_Name
       value: Squirrel (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715627411762520793, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -878,11 +886,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2111560022573241260, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.713
+      value: -0.211
       objectReference: {fileID: 0}
     - target: {fileID: 2111560022573241260, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.519
+      value: -0.356
       objectReference: {fileID: 0}
     - target: {fileID: 2111560022573241260, guid: bf40d99700d8cf947828e2cbc9e9eedc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1188,7 +1196,7 @@ Transform:
   m_GameObject: {fileID: 1395243753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6329, y: 0.107, z: 0}
+  m_LocalPosition: {x: 0.6329, y: -0.693, z: 0}
   m_LocalScale: {x: 0.4800937, y: 0.40360624, z: 0.22218}
   m_ConstrainProportionsScale: 0
   m_Children: []
