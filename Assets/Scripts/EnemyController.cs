@@ -16,19 +16,7 @@ public class EnemyController : Core
 
     private void Awake()
     {
-        if (archetype.needBehaviour)
-        {
-            SetPatrol();
-            SetCollect();
-            SetAttack();
-        }
-        else
-        {
-            collect = null;
-            attack = null;
-            patrol.anchorLeft = null;
-            patrol.anchorRigth = null;
-        }
+        SetBehaviour();
     }
     // Start is called before the first frame update
     void Start()
@@ -44,25 +32,29 @@ public class EnemyController : Core
         {
             if (state.isComplete)
             {
-                if (state == collect)
+                if (collect != null && state == collect)
                 {
                     Set(patrol);
                 }
-                if (state == attack)
+                if (attack != null && state == attack)
                 {
                     Set(patrol);
                 }
             }
             if (state == patrol)
             {
-                collect.CheckForTarget();
-
-                if (collect.target != null)
+                if(collect != null)
                 {
-                    Set(collect);
+                    collect.CheckForTarget();
+
+                    if (collect.target != null)
+                    {
+                        Set(collect);
+                    }
                 }
+              
             }
-            if (state != attack && playerDetection.PlayerInView)
+            if (attack != null && state != attack && playerDetection.PlayerInView)
             {
                 Set(attack);
             }
@@ -85,6 +77,23 @@ public class EnemyController : Core
     {
         isHurt = true;
         GetComponentInChildren<BoxCollider2D>().gameObject.SetActive(false);
+    }
+
+    private void SetBehaviour()
+    {
+        if (archetype.needBehaviour)
+        {
+            SetPatrol();
+            SetCollect();
+            SetAttack();
+        }
+        else
+        {
+            collect = null;
+            attack = null;
+            patrol.anchorLeft = null;
+            patrol.anchorRigth = null;
+        }
     }
 
     private void SetPatrol()

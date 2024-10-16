@@ -6,7 +6,7 @@ using UnityEngine;
 public class Navigate : State
 {
     public Vector2 destination;
-    public float Speed { get; set; }
+    public float Speed { get; set; } = 0.5f;
     private readonly float threshold = 0.15f;
     private readonly float jumpSpeed = 50f;
     public State animationState;
