@@ -391,6 +391,8 @@ MonoBehaviour:
   nutLauncher: {fileID: 8620197018360435292}
   target: {fileID: 0}
   playerDetection: {fileID: 9164411712647896587}
+  throwMethod: 2
+  minTime: 3
 --- !u!1 &3859477856433178316
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,13 +796,13 @@ MonoBehaviour:
   rb: {fileID: 1948757018227375593}
   anim: {fileID: 2148608454621856510}
   groundSensor: {fileID: 2435664490494091666}
+  collectTransform: {fileID: 0}
   patrol: {fileID: 6960820189203358644}
   collect: {fileID: 1594482576457283223}
   hurt: {fileID: 8013667074926306341}
   attack: {fileID: 8547070779163872427}
   playerDetection: {fileID: 9164411712647896587}
-  isHurt: 0
-  hasPlayerTarget: 0
+  archetype: {fileID: 11400000, guid: a9fba69fc8919564dae0d67e713a0bf9, type: 2}
 --- !u!114 &2435664490494091666
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : Core
 {
+    [SerializeReference]private Transform collectTransform;
     public Patrol patrol;
     public Collect collect;
     public Hurt hurt;
     public Attack attack;
     public PlayerDetection playerDetection;
     private bool isHurt = false;
+    [SerializeReference] private Archetype archetype;
 
+    private void Awake()
+    {
+        if (archetype.needBehaviour)
+        {
+            SetPatrol();
+            SetCollect();
+            SetAttack();
+        }
+        else
+        {
+            collect = null;
+            attack = null;
+            patrol.anchorLeft = null;
+            patrol.anchorRigth = null;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +64,6 @@ public class EnemyController : Core
             }
             if (state != attack && playerDetection.PlayerInView)
             {
-                Debug.Log(state);
                 Set(attack);
             }
 
@@ -67,6 +85,57 @@ public class EnemyController : Core
     {
         isHurt = true;
         GetComponentInChildren<BoxCollider2D>().gameObject.SetActive(false);
+    }
+
+    private void SetPatrol()
+    {
+        if (archetype.canPatrol)
+        {
+            patrol.navigate.Speed = archetype.patrolSpeed;
+        }
+        else
+        {
+            patrol.anchorLeft = null;
+            patrol.anchorRigth = null;
+        }
+    }
+
+    private void SetCollect()
+    {
+        if (archetype.canCollect)
+        {
+            collect.navigate.Speed = archetype.collectSpeed;
+        }
+        else
+        {
+            collect = null;
+        }
+    }
+
+    private void SetAttack()
+    {
+        if (archetype.canAttack)
+        {
+
+            attack.minTime = archetype.minTimeBetweenThrow;
+            attack.throwMethod = archetype.throwMethod;
+
+            //TODO when split attack state
+            if (archetype.canThrow)
+            {
+                
+            }
+
+            if (archetype.canChase)
+            {
+                
+            }
+            
+        }
+        else
+        {
+            attack = null;
+        }
     }
 
 }

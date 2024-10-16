@@ -11,9 +11,15 @@ public class Attack : State
     private readonly float speed = 5;
     private bool canShot;
     public PlayerDetection playerDetection;
+    public ThrowMethod throwMethod = ThrowMethod.MIN_SPEED;
 
-    private float timer = 3.5f;
-    private float minTime = 3f;
+    private float timer;
+    public float minTime = 3f;
+
+    private void Start()
+    {
+        timer = minTime;
+    }
 
     public override void Enter()
     {
@@ -83,18 +89,27 @@ public class Attack : State
         }
 
         float discRoot = Mathf.Sqrt(discriminant);
+        float T;
 
-        // Highest shot with the given max speed:
-        float T_max = Mathf.Sqrt((b + discRoot) * 2f / gSquared);
-
-        // Most direct shot with the given max speed:
-        float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
-
-        // Lowest-speed arc available:
-        float T_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(toTarget.sqrMagnitude * 4f / gSquared));
-
-        // Choose T (for example, you could use T_max):
-        float T = T_lowEnergy; // or T_min, or T_lowEnergy, depending on your needs
+        if(throwMethod == ThrowMethod.DIRECT)
+        {
+            float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
+            T = T_min;
+        }
+        else if(throwMethod == ThrowMethod.LOBE)
+        {
+            float T_max = Mathf.Sqrt((b + discRoot) * 2f / gSquared);
+            T = T_max;
+        }
+        else if(throwMethod == ThrowMethod.MIN_SPEED){
+            float T_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(toTarget.sqrMagnitude * 4f / gSquared));
+            T = T_lowEnergy;
+        }
+        else
+        {
+            canShot = false;
+            return;
+        }
 
         // Convert from time-to-hit to a launch velocity:
         Vector2 velocity = toTarget / T - Physics2D.gravity * T / 2f;
