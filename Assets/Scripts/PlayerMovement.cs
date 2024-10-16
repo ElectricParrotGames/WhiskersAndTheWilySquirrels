@@ -91,8 +91,6 @@ public class PlayerMovement : Core
 
     void SelectState()
     {
-        State oldState = machine.state;
-
         if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
         {
             if (xInput == 0)
@@ -106,8 +104,11 @@ public class PlayerMovement : Core
         }
         else
         {
+            if(state != airState)
             machine.Set(airState);
         }
+
+        state.DoBranch();
     }
 
     void FaceInput()

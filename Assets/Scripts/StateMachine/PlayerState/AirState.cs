@@ -23,6 +23,21 @@ public class AirState : State
 
     public override void Do()
     {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") && rb.velocity.y < 0)
+        {
+            
+            anim.Play("Fall");
+            anim.speed = 0.5f;
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Fall") && rb.velocity.y >= 0)
+        {
+
+            anim.Play("Jump");
+            anim.speed = 0.5f;
+        }
+
+
         if (core.groundSensor.isGrounded)
         {
             isComplete = true;
