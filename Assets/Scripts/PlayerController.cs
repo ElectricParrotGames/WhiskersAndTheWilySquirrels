@@ -6,15 +6,15 @@ using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerMovement : Core
+public class PlayerController : Core
 {
     public State airState;
     public State runState;
     public State idleState;
-
+    public State hurtState;
     public Transform pocket;
 
-
+    private bool isHurt;
     public float xInput { get; private set; }
     public float yInput { get; private set; }
 
@@ -104,10 +104,15 @@ public class PlayerMovement : Core
         }
         else
         {
-            if(state != airState)
-            machine.Set(airState);
+            if (state != airState)
+                machine.Set(airState);
         }
+        if (isHurt)
+        {
 
+            machine.Set(hurtState);
+            isHurt = false;
+        }
         state.DoBranch();
     }
 
@@ -148,15 +153,36 @@ public class PlayerMovement : Core
         }
     }
 
+    private void Hurt()
+    {
+
+        Debug.Log("MY FACE!");
+        //implement lives later
+        isHurt = true;
+
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Catnip"))
+        GameObject collisionGameObject = collision.gameObject;
+
+        if (collisionGameObject.CompareTag("Catnip"))
         {
 
-            collision.transform.SetParent(pocket);
-            collision.gameObject.SetActive(false);
 
+            if (collisionGameObject.GetComponent<CatnipScript>().CanBeTake)
+            {
+                collision.transform.SetParent(pocket);
+                collisionGameObject.SetActive(false);
+
+            }
+
+
+        }
+        if (collisionGameObject.CompareTag("Squirrel") || collisionGameObject.CompareTag("Projectile"))
+        {
+            Hurt();
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AirState : State
 {
 
-    public PlayerMovement input;
+    public PlayerController input;
     public override void Enter()
     {
         if(rb.velocity.y >= 0)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class IdleState : State
 {
 
-    public PlayerMovement input;
+    public PlayerController input;
     public override void Enter()
     {
         anim.Play("Idle1");
