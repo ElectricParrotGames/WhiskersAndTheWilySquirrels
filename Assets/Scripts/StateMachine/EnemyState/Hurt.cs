@@ -11,14 +11,13 @@ public class Hurt : State
     public override void Enter()
     {
         anim.Play("Death");
-        ReleaseCatnip();
-        
     }
 
     public override void Do()
     {
         timer += Time.deltaTime;
-        if(timer >= timeBeforeDisapearing && !hasDisapear)
+        ReleaseCatnip();
+        if (timer >= timeBeforeDisapearing && !hasDisapear)
         {
             hasDisapear = true;
             transform.root.gameObject.SetActive(false);
@@ -36,6 +35,7 @@ public class Hurt : State
     }
 
     private void ReleaseCatnip() {
+        
         for (int i = 0; i < mouth.transform.childCount; i++)
         {
             Vector2 direction = new Vector2((float)Random.Range(-0.5f, 0.5f), (float)Random.Range(1, 2));
@@ -50,5 +50,7 @@ public class Hurt : State
             Rigidbody2D catnipRb = catnip.GetComponent<Rigidbody2D>();
             catnipRb.velocity = direction * force;
         }
+        
+        
     }
 }

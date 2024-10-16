@@ -91,26 +91,30 @@ public class PlayerController : Core
 
     void SelectState()
     {
-        if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
+        if (state.isComplete)
         {
-            if (xInput == 0)
+            if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
             {
-                machine.Set(idleState);
+                if (xInput == 0)
+                {
+                    Set(idleState);
+                }
+                else
+                {
+                    Set(runState);
+                }
             }
             else
             {
-                machine.Set(runState);
+                if (state != airState)
+                    Set(airState);
             }
         }
-        else
-        {
-            if (state != airState)
-                machine.Set(airState);
-        }
-        if (isHurt)
+        
+        if (state != hurtState && isHurt)
         {
 
-            machine.Set(hurtState);
+            Set(hurtState);
             isHurt = false;
         }
         state.DoBranch();
