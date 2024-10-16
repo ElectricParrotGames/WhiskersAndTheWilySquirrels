@@ -148,20 +148,6 @@ public class PlayerMovement : Core
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("HurtHitbox"))
-        {
-            if (rb.velocity.y < 0)
-            {
-                collision.gameObject.GetComponentInParent<EnemyController>().Hurt();
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed/2);
-                Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponent<CircleCollider2D>());
-            }
-        }
-
-
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

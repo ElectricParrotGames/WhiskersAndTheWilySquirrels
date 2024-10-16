@@ -7,21 +7,22 @@ public class Introduction : MonoBehaviour
 {
 
     public TMP_Text message;
-    private float displayDuration = 4f;
-        // Start is called before the first frame update
+
+    public TextNarrator textNarrator;
+
+    // Start is called before the first frame update
     void Start()
     {
         message.gameObject.SetActive(false);
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.CompareTag("Player")) // Ensure your player has the "Player" tag
         {
-            ShowText("Those little rascals think they can just waltz in and take what’s mine? Not on my watch!"); // Set your message
-            
+            ShowText(textNarrator.text);
         }
     }
 
@@ -29,12 +30,13 @@ public class Introduction : MonoBehaviour
     {
         message.text = shownMessage; // Set the message
         message.gameObject.SetActive(true); // Show the text
-        Invoke("HideText", displayDuration); // Call HideText after the duration
+        Invoke("HideText", textNarrator.displayDuration); // Call HideText after the duration
     }
 
     private void HideText()
     {
         message.gameObject.SetActive(false);
-      Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }
+

@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class EnemyController : Core
 {
-    [SerializeReference]private Transform collectTransform;
     public Patrol patrol;
     public Collect collect;
     public Hurt hurt;
     public Attack attack;
     public PlayerDetection playerDetection;
+
+    private float playerBounce = 1.75f;
     private bool isHurt = false;
     [SerializeReference] private Archetype archetype;
 
@@ -147,4 +148,21 @@ public class EnemyController : Core
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        if (collision.CompareTag("Player"))
+        {
+           
+            Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
+            if (playerRb != null && playerRb.velocity.y < 0) 
+            {
+               
+                Hurt();
+               
+                playerRb.velocity = new Vector2(playerRb.velocity.x, playerBounce);
+                Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponent<CircleCollider2D>());
+            }
+        }
+    }
 }
