@@ -9,8 +9,7 @@ public class EnemyController : Core
     public Hurt hurt;
     public Attack attack;
     public PlayerDetection playerDetection;
-    public bool isHurt = false;
-    public bool hasPlayerTarget = false;
+    private bool isHurt = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,39 +21,40 @@ public class EnemyController : Core
     // Update is called once per frame
     void Update()
     {
+        if(state != hurt)
+        {
+            if (state.isComplete)
+            {
+                if (state == collect)
+                {
+                    Set(patrol);
+                }
+                if (state == attack)
+                {
+                    Set(patrol);
+                }
+            }
+            if (state == patrol)
+            {
+                collect.CheckForTarget();
+
+                if (collect.target != null)
+                {
+                    Set(collect);
+                }
+            }
+            if (state != attack && playerDetection.PlayerInView)
+            {
+                Debug.Log(state);
+                Set(attack);
+            }
+
+            if (isHurt)
+            {
+                Set(hurt, true);
+            }
+        }
         
-        if (state.isComplete)
-        {
-            if(state == collect)
-            {
-                Set(patrol);
-            }
-            if(state == attack)
-            {
-                hasPlayerTarget = false;
-                Set(patrol);
-            }
-        }
-        if(state == patrol)
-        {
-            collect.CheckForTarget();
-
-            if(collect.target != null)
-            {
-                Set(collect);
-            }
-        }
-        if (state != attack && playerDetection.PlayerInView)
-        {
-            Debug.Log(state);
-            Set(attack);
-        }
-
-        if (state != hurt && isHurt)
-        {
-            Set(hurt,true);
-        }
-
         state.DoBranch();
     }
 
