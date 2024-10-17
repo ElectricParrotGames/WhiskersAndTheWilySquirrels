@@ -115,6 +115,14 @@ public class EnemyController : Core
         if (archetype.canCollect)
         {
             collect.navigate.Speed = archetype.collectSpeed;
+            if (!archetype.canBury)
+            {
+                collect.bury = null;
+            }
+            if (!archetype.canEat)
+            {
+                collect.eat = null;
+            }
         }
         else
         {

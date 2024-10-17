@@ -216,6 +216,8 @@ GameObject:
   - component: {fileID: 3299634137902608697}
   - component: {fileID: 1594482576457283223}
   - component: {fileID: 1814189305194365965}
+  - component: {fileID: 1077887303638639050}
+  - component: {fileID: 2931135966735766458}
   m_Layer: 0
   m_Name: Collect
   m_TagString: Untagged
@@ -253,8 +255,10 @@ MonoBehaviour:
   catnips: []
   target: {fileID: 0}
   navigate: {fileID: 1814189305194365965}
-  take: {fileID: 8115546545515242161}
+  take: {fileID: 0}
   idle: {fileID: 6308361619427025313}
+  bury: {fileID: 2931135966735766458}
+  eat: {fileID: 1077887303638639050}
   mouth: {fileID: 2968980753663633497}
   catnipDetection: {fileID: 4238095744572642837}
 --- !u!114 &1814189305194365965
@@ -274,6 +278,34 @@ MonoBehaviour:
   detection: {fileID: 2355921373811909440}
   groundSensor: {fileID: 6948680300065014543}
   fallDetection: {fileID: 5074465987317796908}
+--- !u!114 &1077887303638639050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282402620499901737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e2fb411a72ae14a9d9b78bfd4dfa91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouth: {fileID: 2968980753663633497}
+  target: {fileID: 0}
+--- !u!114 &2931135966735766458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2282402620499901737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159df43e6093f864d89cd1fba0a43c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dirtPrefab: {fileID: 585139463551857620, guid: 4def760d8dcb6bb40bcdc32cc63a6631, type: 3}
+  target: {fileID: 0}
 --- !u!1 &2663042287206245835
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +339,6 @@ Transform:
   - {fileID: 680277944850428066}
   - {fileID: 8621667394965994036}
   - {fileID: 3299634137902608697}
-  - {fileID: 1960803451264053008}
   - {fileID: 147876105826163569}
   - {fileID: 1637329070781288998}
   m_Father: {fileID: 2111560022573241260}
@@ -560,50 +591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae6f92b250e59942afedef3259c0426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4411733065915788444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1960803451264053008}
-  - component: {fileID: 8115546545515242161}
-  m_Layer: 0
-  m_Name: Take
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1960803451264053008
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411733065915788444}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6586438265957711164}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8115546545515242161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4411733065915788444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bbbab593608e04f841d97bfbcddced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4715627411762520793
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +783,6 @@ MonoBehaviour:
   rb: {fileID: 1948757018227375593}
   anim: {fileID: 2148608454621856510}
   groundSensor: {fileID: 2435664490494091666}
-  collectTransform: {fileID: 0}
   patrol: {fileID: 6960820189203358644}
   collect: {fileID: 1594482576457283223}
   hurt: {fileID: 8013667074926306341}

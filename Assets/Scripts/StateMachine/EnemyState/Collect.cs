@@ -7,8 +7,9 @@ public class Collect : State
     public List<Transform> catnips;
     public Transform target;
     public Navigate navigate;
-    public Take take;
     public Idle idle;
+    public Bury bury;
+    public Eat eat;
     private readonly float collectRadius = 0.2f;
     public Transform mouth;
     public CatnipDetection catnipDetection;
@@ -30,11 +31,24 @@ public class Collect : State
         {
             if (CloseEnough(target.position))
             {
-                target.SetParent(mouth);
-                target.gameObject.SetActive(false);
                 rb.velocity = new Vector2(0, rb.velocity.y);
-                Set(take, true);
-                return;
+                int randomNumber = 3;
+                if (bury != null && eat != null)
+                {
+                    randomNumber = Random.Range(0, 2);
+                }
+                
+                if((bury != null && eat == null) || randomNumber == 0){
+                    bury.target = target;
+                    Set(bury, true);
+                }
+                else if((eat != null && bury == null) || randomNumber == 1)
+                {
+                    eat.target = target;
+                    Set(eat, true);
+                }
+                
+                
             }
             else if (!InVision(target.position))
             {
