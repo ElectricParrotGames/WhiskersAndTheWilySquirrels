@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87dbdfd4c2327f6438dea334ee86aa38, type: 3}
-  m_Name: Lober
+  m_Name: Eater
   m_EditorClassIdentifier: 
   needBehaviour: 1
   canPatrol: 1
   patrolSpeed: 0.5
   canCollect: 1
-  collectSpeed: 0.5
+  collectSpeed: 1
   canEat: 1
   canBury: 0
-  canAttack: 1
-  canThrow: 1
-  minTimeBetweenThrow: 3
+  canAttack: 0
+  minTimeBetweenAttack: 0
+  canThrow: 0
   throwMethod: 0
   canChase: 0
   chaseSpeed: 0
-  waitBetweenChase: 0

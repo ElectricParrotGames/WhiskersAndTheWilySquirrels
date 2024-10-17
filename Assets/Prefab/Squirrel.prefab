@@ -255,7 +255,6 @@ MonoBehaviour:
   catnips: []
   target: {fileID: 0}
   navigate: {fileID: 1814189305194365965}
-  take: {fileID: 0}
   idle: {fileID: 6308361619427025313}
   bury: {fileID: 2931135966735766458}
   eat: {fileID: 1077887303638639050}
@@ -384,6 +383,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1637329070781288998}
   - component: {fileID: 8547070779163872427}
+  - component: {fileID: 3617427548835993652}
+  - component: {fileID: 8789167669396618549}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -418,12 +419,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d42b002f4786f4e9d542fdcc4e8cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDetection: {fileID: 9164411712647896587}
+  throws: {fileID: 3617427548835993652}
+  chase: {fileID: 8789167669396618549}
+  target: {fileID: 0}
+  minTimeBetweenAttack: 3
+--- !u!114 &3617427548835993652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3323615617927762205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e021bbe4c1ff20a45bdfbe0e1110b187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   prefabAcorn: {fileID: 2269874899657084983, guid: 077a7230a7d7ca0449340969acae8ff1, type: 3}
   nutLauncher: {fileID: 8620197018360435292}
   target: {fileID: 0}
-  playerDetection: {fileID: 9164411712647896587}
   throwMethod: 2
-  minTime: 3
+--- !u!114 &8789167669396618549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3323615617927762205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec363ed406b2e845b204f24a0238b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {x: 0, y: 0}
+  animationState: {fileID: 4330564346975924614}
+  detection: {fileID: 2355921373811909440}
+  groundSensor: {fileID: 6948680300065014543}
+  fallDetection: {fileID: 5074465987317796908}
 --- !u!1 &3859477856433178316
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +821,7 @@ MonoBehaviour:
   hurt: {fileID: 8013667074926306341}
   attack: {fileID: 8547070779163872427}
   playerDetection: {fileID: 9164411712647896587}
-  archetype: {fileID: 11400000, guid: a9fba69fc8919564dae0d67e713a0bf9, type: 2}
+  archetype: {fileID: 11400000, guid: 054ceb672b4601f46b69fb540373a430, type: 2}
 --- !u!114 &2435664490494091666
 MonoBehaviour:
   m_ObjectHideFlags: 0

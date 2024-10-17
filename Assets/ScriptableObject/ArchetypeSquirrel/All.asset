@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87dbdfd4c2327f6438dea334ee86aa38, type: 3}
-  m_Name: Keeper
+  m_Name: All
   m_EditorClassIdentifier: 
   needBehaviour: 1
   canPatrol: 1
@@ -19,10 +19,9 @@ MonoBehaviour:
   collectSpeed: 1
   canEat: 1
   canBury: 1
-  canAttack: 0
-  canThrow: 0
-  minTimeBetweenThrow: 0
-  throwMethod: 0
-  canChase: 0
-  chaseSpeed: 0
-  waitBetweenChase: 0
+  canAttack: 1
+  minTimeBetweenAttack: 3
+  canThrow: 1
+  throwMethod: 1
+  canChase: 1
+  chaseSpeed: 1.5

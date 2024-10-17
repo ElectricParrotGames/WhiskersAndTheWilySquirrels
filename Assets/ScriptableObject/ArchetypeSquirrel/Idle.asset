@@ -20,9 +20,8 @@ MonoBehaviour:
   canEat: 0
   canBury: 0
   canAttack: 0
+  minTimeBetweenAttack: 0
   canThrow: 0
-  minTimeBetweenThrow: 0
   throwMethod: 0
   canChase: 0
   chaseSpeed: 0
-  waitBetweenChase: 0

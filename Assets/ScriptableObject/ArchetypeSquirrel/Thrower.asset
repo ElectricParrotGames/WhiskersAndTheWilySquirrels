@@ -16,13 +16,12 @@ MonoBehaviour:
   canPatrol: 1
   patrolSpeed: 0.5
   canCollect: 1
-  collectSpeed: 0.5
-  canEat: 1
-  canBury: 0
+  collectSpeed: 1
+  canEat: 0
+  canBury: 1
   canAttack: 1
+  minTimeBetweenAttack: 3
   canThrow: 1
-  minTimeBetweenThrow: 3
   throwMethod: 2
   canChase: 0
   chaseSpeed: 0
-  waitBetweenChase: 0

@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dbdfd4c2327f6438dea334ee86aa38, type: 3}
   m_Name: Chaser
   m_EditorClassIdentifier: 
-  needBehaviour: 0
-  canPatrol: 0
-  patrolSpeed: 0
-  canCollect: 0
-  collectSpeed: 0
-  canEat: 0
+  needBehaviour: 1
+  canPatrol: 1
+  patrolSpeed: 0.5
+  canCollect: 1
+  collectSpeed: 1
+  canEat: 1
   canBury: 0
-  canAttack: 0
+  canAttack: 1
+  minTimeBetweenAttack: 3
   canThrow: 0
-  minTimeBetweenThrow: 0
   throwMethod: 0
-  canChase: 0
-  chaseSpeed: 0
-  waitBetweenChase: 0
+  canChase: 1
+  chaseSpeed: 1.5

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class EnemyController : Core
@@ -57,7 +58,7 @@ public class EnemyController : Core
             }
             if (attack != null && state != attack && playerDetection.PlayerInView)
             {
-                Set(attack);
+                Set(attack, true);
             }
 
             if (isHurt)
@@ -135,20 +136,25 @@ public class EnemyController : Core
         if (archetype.canAttack)
         {
 
-            attack.minTime = archetype.minTimeBetweenThrow;
-            attack.throwMethod = archetype.throwMethod;
-
-            //TODO when split attack state
             if (archetype.canThrow)
             {
-                
+                attack.minTimeBetweenAttack = archetype.minTimeBetweenAttack;
+                attack.throws.throwMethod = archetype.throwMethod;
+            }
+            else
+            {
+                attack.throws = null;
             }
 
             if (archetype.canChase)
             {
-                
+                attack.chase.Speed = archetype.chaseSpeed;
             }
-            
+            else
+            {
+                attack.chase = null;
+            }
+
         }
         else
         {

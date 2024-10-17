@@ -5,20 +5,17 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Attack : State
 {
-    public GameObject prefabAcorn;
-    public Transform nutLauncher;
-    public Transform target;
-    private readonly float speed = 5;
-    private bool canShot;
+    
     public PlayerDetection playerDetection;
-    public ThrowMethod throwMethod = ThrowMethod.MIN_SPEED;
-
+    public Throw throws;
+    public Chase chase;
+    public Transform target;
     private float timer;
-    public float minTime = 3f;
+    public float minTimeBetweenAttack = 3f;
 
     private void Start()
     {
-        timer = minTime;
+        timer = minTimeBetweenAttack;
     }
 
     public override void Enter()
@@ -31,14 +28,31 @@ public class Attack : State
     {
         target = playerDetection.TargetTransform;
         timer += Time.deltaTime;
-        if(timer >= minTime)
+
+        if(state == chase && state.isComplete)
         {
-            canShot = true;
+            target = null;
         }
-        if (canShot)
+        else if(timer >= minTimeBetweenAttack)
         {
-            timer = 0f;
-            anim.Play("Attack");
+            timer = 0;
+
+            int randomNumber = 3;
+            if (throws != null && chase != null)
+            {
+                randomNumber = Random.Range(0, 2);
+            }
+
+            if ((throws != null && chase == null) || randomNumber == 0)
+            {
+                throws.target = target;
+                Set(throws, true);
+            }
+            else if(chase != null && throws == null || randomNumber == 1)
+            {
+                chase.destination = target.position;
+                Set(chase, true);
+            }
         }
         else
         {
@@ -47,7 +61,8 @@ public class Attack : State
                 anim.Play("Idle");
             }
         }
-        if(target == null)
+
+        if (target == null)
         {
             isComplete = true;
         }
@@ -55,68 +70,12 @@ public class Attack : State
 
     public override void FixedDo()
     {
-        if (canShot)
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
-        anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
-                Shot();
-                canShot = false;
-            }
-        }
-        
+
     }
     public override void Exit()
     {
 
     }
-
-    private void Shot()
-    {
-        // Get the target position relative to the projectile's position.
-        Vector2 toTarget = target.position - nutLauncher.position;
-
-        // Set up the terms needed to solve the quadratic equations.
-        float gSquared = Physics2D.gravity.sqrMagnitude;
-        float b = speed * speed + Vector2.Dot(toTarget, Physics2D.gravity);
-        float discriminant = b * b - gSquared * toTarget.sqrMagnitude;
-
-        // Check whether the target is reachable at max speed or less.
-        if (discriminant < 0)
-        {
-            canShot = false;
-            return;
-        }
-
-        float discRoot = Mathf.Sqrt(discriminant);
-        float T;
-
-        if(throwMethod == ThrowMethod.DIRECT)
-        {
-            float T_min = Mathf.Sqrt((b - discRoot) * 2f / gSquared);
-            T = T_min;
-        }
-        else if(throwMethod == ThrowMethod.LOBE)
-        {
-            float T_max = Mathf.Sqrt((b + discRoot) * 2f / gSquared);
-            T = T_max;
-        }
-        else if(throwMethod == ThrowMethod.MIN_SPEED){
-            float T_lowEnergy = Mathf.Sqrt(Mathf.Sqrt(toTarget.sqrMagnitude * 4f / gSquared));
-            T = T_lowEnergy;
-        }
-        else
-        {
-            canShot = false;
-            return;
-        }
-
-        // Convert from time-to-hit to a launch velocity:
-        Vector2 velocity = toTarget / T - Physics2D.gravity * T / 2f;
-
-        GameObject projectile = Instantiate(prefabAcorn, nutLauncher.position, nutLauncher.rotation);
-        // Apply the calculated velocity (using AddForce2D with ForceMode2D.Impulse)
-        projectile.GetComponent<Rigidbody2D>().AddForce(velocity, ForceMode2D.Impulse);
         
-    }
+    
 }
