@@ -7,7 +7,6 @@ public class GameMaster : MonoBehaviour
 {
 
     public static GameMaster instance;
-    private GameObject[] squirrels;
     private List<Transform> catnips = new List<Transform>();
     public int level { get; private set; } = 0;
 
@@ -16,11 +15,6 @@ public class GameMaster : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         instance = this;
         level = PlayerPrefs.GetInt("level");
-    }
-
-    void Start()
-    {
-        squirrels = GameObject.FindGameObjectsWithTag("Squirrel");
 
         foreach (var obj in FindObjectsOfType<Transform>(true))
         {
@@ -29,15 +23,11 @@ public class GameMaster : MonoBehaviour
                 catnips.Add(obj);
             }
         }
+    }
 
-        foreach (GameObject squirrel in squirrels)
-        {
-            foreach (Transform catnip in catnips)
-            {
-                squirrel.GetComponentInChildren<Collect>().catnips.Add(catnip);
-            }
-            
-        }
+    void Start()
+    {
+        
     }
 
     void Update()
@@ -48,5 +38,10 @@ public class GameMaster : MonoBehaviour
     private void OnDisable()
     {
         PlayerPrefs.SetInt("level", level);
+    }
+
+    public List<Transform> GetAllCatnips()
+    {
+        return catnips;
     }
 }

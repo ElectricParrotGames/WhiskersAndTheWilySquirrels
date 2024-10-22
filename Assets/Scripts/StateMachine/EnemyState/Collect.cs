@@ -14,9 +14,11 @@ public class Collect : State
     public Transform mouth;
     public CatnipDetection catnipDetection;
 
+
     private void Start()
     {
         navigate.Speed = 1f;
+        catnips = GameMaster.instance.GetAllCatnips();
     }
 
     public override void Enter()
