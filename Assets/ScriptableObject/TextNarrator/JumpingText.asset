@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f601abe7fc2d4e24ea4157813d362f27, type: 3}
   m_Name: JumpingText
   m_EditorClassIdentifier: 
-  text: 
-  displayDuration: 0
+  text: "I\u2019m awake and ready to leap! Press the space bar to make me jump!"
+  displayDuration: 3
