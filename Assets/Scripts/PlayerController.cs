@@ -66,6 +66,8 @@ public class PlayerController : Core
         {
             ApplyFriction();
         }
+
+        state?.FixedDoBranch();
     }
 
     void Move()
@@ -114,7 +116,7 @@ public class PlayerController : Core
         if (state != hurtState && isHurt)
         {
 
-            Set(hurtState);
+            Set(hurtState, true);
             isHurt = false;
         }
         state.DoBranch();

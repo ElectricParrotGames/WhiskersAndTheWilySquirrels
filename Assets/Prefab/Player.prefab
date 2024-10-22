@@ -351,7 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b85395d72cb6fc45bdd1392badedbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pocket: {fileID: 1656040268440057523}
+  pocket: {fileID: 845106047370658450}
+  playerController: {fileID: 4923026409240743425}
 --- !u!1 &2928261415300248488
 GameObject:
   m_ObjectHideFlags: 0

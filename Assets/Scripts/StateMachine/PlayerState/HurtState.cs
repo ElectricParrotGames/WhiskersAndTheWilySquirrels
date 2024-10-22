@@ -37,7 +37,10 @@ public class HurtState : State
     {
         if (numberCatnipRelease == amountOfCatnipDropped)
         {
-            isComplete = true;
+            if (playerKnockedback)
+            {
+                isComplete = true;
+            }
         }
         else
         {
