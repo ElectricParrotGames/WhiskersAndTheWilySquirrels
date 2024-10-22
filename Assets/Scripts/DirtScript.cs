@@ -18,7 +18,6 @@ public class DirtScript : MonoBehaviour
 
     public void ReleaseCatnip()
     {
-        Debug.Log("call");
         Vector2 direction = new Vector2((float)Random.Range(-0.5f, 0.5f), (float)Random.Range(1, 2));
         float force = (float)Random.Range(0.5f, 2);
 
