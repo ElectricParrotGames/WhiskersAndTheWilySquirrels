@@ -29,7 +29,7 @@ public class Attack : State
         target = playerDetection.TargetTransform;
         timer += Time.deltaTime;
 
-        if(state == chase && state.isComplete)
+        if (state != null && state == chase && state.isComplete)
         {
             target = null;
         }
