@@ -13,14 +13,15 @@ public class HurtState : State
     private int numberCatnipRelease;
     private int amountOfCatnipDropped;
     public PlayerController playerController;
+    public GroundSensor groundSensor;
 
-    private float playerKnockback = 3f;
+    private float playerKnockback = 2.0f;
     private float playerKnockUp = 2f;
     private bool playerKnockedback;
 
     public override void Enter()
     {
-
+        playerKnockedback = false;
         numberCatnipRelease = 0;
 
         int catnipCount = pocket.transform.childCount;
@@ -37,7 +38,7 @@ public class HurtState : State
     {
         if (numberCatnipRelease == amountOfCatnipDropped)
         {
-            if (playerKnockedback)
+            if (playerKnockedback && groundSensor.isGrounded  && rb.velocity.y <= 0)
             {
                 isComplete = true;
             }

@@ -47,10 +47,11 @@ public class PlayerController : Core
     // Update is called once per frame
     void Update()
     {
-
-        GetInput();
-        FaceInput();
-        Move();
+        if(state != hurtState) {
+            GetInput();
+            FaceInput();
+            Move();
+        }
         SelectState();
 
 
@@ -72,7 +73,7 @@ public class PlayerController : Core
 
     void Move()
     {
-
+        
         if (Mathf.Abs(xInput) > 0.01f)
         {
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
@@ -95,6 +96,10 @@ public class PlayerController : Core
     {
         if (state.isComplete)
         {
+            if(state == hurtState)
+            {
+                ContactDirection = 0;
+            }
             if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
             {
                 if (xInput == 0)
@@ -192,9 +197,8 @@ public class PlayerController : Core
         {
             ContactDirection = Mathf.Sign(collisionGameObject.GetComponent<Rigidbody2D>().velocity.x);
 
-            //
-
             Hurt();
+
             
 
         }
