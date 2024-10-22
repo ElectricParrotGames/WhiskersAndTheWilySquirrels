@@ -12,9 +12,15 @@ public class HurtState : State
     private float dropPercentage = 0.33f;
     private int numberCatnipRelease;
     private int amountOfCatnipDropped;
+    public PlayerController playerController;
+
+    private float playerKnockback = 3f;
+    private float playerKnockUp = 2f;
+    private bool playerKnockedback;
 
     public override void Enter()
     {
+
         numberCatnipRelease = 0;
 
         int catnipCount = pocket.transform.childCount;
@@ -29,18 +35,23 @@ public class HurtState : State
 
     public override void Do()
     {
-        if(numberCatnipRelease == amountOfCatnipDropped)
+        if (numberCatnipRelease == amountOfCatnipDropped)
         {
             isComplete = true;
         }
-        else { 
-            ReleaseCatnip(); 
+        else
+        {
+            ReleaseCatnip();
         }
     }
 
     public override void FixedDo()
     {
-
+        if (!playerKnockedback)
+        {
+            rb.AddForce(new Vector2(playerController.ContactDirection * playerKnockback, playerKnockUp), ForceMode2D.Impulse);
+            playerKnockedback = true;
+        }
     }
     public override void Exit()
     {

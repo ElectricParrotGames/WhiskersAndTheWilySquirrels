@@ -27,7 +27,7 @@ public class PlayerController : Core
 
     private readonly float passthroughTime = 0.5f;
 
-
+    public float ContactDirection {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -160,9 +160,11 @@ public class PlayerController : Core
     private void Hurt()
     {
 
-        Debug.Log("MY FACE!");
+
         //implement lives later
         isHurt = true;
+
+
 
     }
 
@@ -186,7 +188,13 @@ public class PlayerController : Core
         }
         if (collisionGameObject.CompareTag("Squirrel") || collisionGameObject.CompareTag("Projectile"))
         {
+            ContactDirection = Mathf.Sign(collisionGameObject.GetComponent<Rigidbody2D>().velocity.x);
+
+            //
+
             Hurt();
+            
+
         }
     }
 
