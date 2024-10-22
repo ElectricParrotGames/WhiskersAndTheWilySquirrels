@@ -32,7 +32,9 @@ public class PlayerController : Core
 
     //temp
     private int playerMaxLife = 9;
+
     private bool isDead;
+    private bool isCollectingCatnip;
 
     public float ContactDirection {  get; private set; }
 
@@ -60,11 +62,25 @@ public class PlayerController : Core
             GetInput();
             FaceInput();
             Move();
+            CollectCatnip();
         }
         SelectState();
 
 
     }
+
+    private void CollectCatnip()
+    {
+        if (Input.GetAxisRaw("Fire1") == 1)
+        {
+            isCollectingCatnip = true;
+        }
+        else
+        {
+            isCollectingCatnip = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (yInput < 0)
@@ -88,7 +104,7 @@ public class PlayerController : Core
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && groundSensor.isGrounded)
+        if (Input.GetAxisRaw("Jump") == 1 && groundSensor.isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
@@ -214,6 +230,18 @@ public class PlayerController : Core
 
 
 
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.CompareTag("Dirt"))
+        {
+            if (isCollectingCatnip)
+            {
+                collisionGameObject.GetComponent<DirtScript>().ReleaseCatnip();
+            }
         }
     }
 
