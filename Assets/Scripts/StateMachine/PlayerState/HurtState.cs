@@ -15,8 +15,9 @@ public class HurtState : State
     public PlayerController playerController;
     public GroundSensor groundSensor;
 
-    private float playerKnockback = 2.0f;
+    private float playerKnockback = 1.0f;
     private float playerKnockUp = 2f;
+
     private bool playerKnockedback;
 
     public override void Enter()

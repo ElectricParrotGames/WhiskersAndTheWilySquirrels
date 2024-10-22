@@ -175,7 +175,7 @@ public class EnemyController : Core
                 Hurt();
                
                 playerRb.velocity = new Vector2(playerRb.velocity.x, playerBounce);
-                Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponent<CircleCollider2D>());
+                Physics2D.IgnoreCollision(collision.transform.root.GetComponent<CircleCollider2D>(), gameObject.GetComponentInChildren<BoxCollider2D>());
             }
         }
     }

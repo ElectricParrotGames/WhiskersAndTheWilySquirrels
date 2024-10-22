@@ -14,6 +14,8 @@ public class PlayerController : Core
     public State hurtState;
     public Transform pocket;
 
+    public LifeManager lifeManager;
+
     private bool isHurt;
     public float xInput { get; private set; }
     public float yInput { get; private set; }
@@ -21,17 +23,23 @@ public class PlayerController : Core
     public float maxSpeed { get; private set; }
     private readonly float friction = 1f;
     public float jumpSpeed { get; private set; }
+
     private bool isPassingThrough = false;
 
     private readonly float yThreshold = 0.2f;
 
     private readonly float passthroughTime = 0.5f;
 
+    //temp
+    private int playerMaxLife = 9;
+    private bool isDead;
+
     public float ContactDirection {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        lifeManager.SetStartingLife(playerMaxLife);
         maxSpeed = 1f;
         jumpSpeed = 3.5f;
 
@@ -47,7 +55,8 @@ public class PlayerController : Core
     // Update is called once per frame
     void Update()
     {
-        if(state != hurtState) {
+        IsItDeadYet();
+        if (state != hurtState) {
             GetInput();
             FaceInput();
             Move();
@@ -98,6 +107,7 @@ public class PlayerController : Core
         {
             if(state == hurtState)
             {
+                isHurt = false;
                 ContactDirection = 0;
             }
             if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
@@ -120,9 +130,7 @@ public class PlayerController : Core
         
         if (state != hurtState && isHurt)
         {
-
             Set(hurtState, true);
-            isHurt = false;
         }
         state.DoBranch();
     }
@@ -166,17 +174,21 @@ public class PlayerController : Core
 
     private void Hurt()
     {
-
-
-        //implement lives later
-        isHurt = true;
-
-
-
+        if (!isHurt)
+        {
+            lifeManager.TakeDamage(1);
+            isHurt = true;
+            Debug.Log(lifeManager.LifeTotal);
+        }
     }
 
+    private void IsItDeadYet()
+    {
+        isDead = lifeManager.IsOutOfLives();
+    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+   
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collisionGameObject = collision.gameObject;
 
@@ -193,13 +205,28 @@ public class PlayerController : Core
 
 
         }
-        if (collisionGameObject.CompareTag("Squirrel") || collisionGameObject.CompareTag("Projectile"))
+        if (collisionGameObject.CompareTag("Squirrel"))
+        {
+
+            ContactDirection = Mathf.Sign(gameObject.transform.position.x - collisionGameObject.transform.position.x);
+
+            Hurt();
+
+
+
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject collisionGameObject = collision.gameObject;
+        if (collisionGameObject.CompareTag("Projectile"))
         {
             ContactDirection = Mathf.Sign(collisionGameObject.GetComponent<Rigidbody2D>().velocity.x);
 
             Hurt();
 
-            
+
 
         }
     }
