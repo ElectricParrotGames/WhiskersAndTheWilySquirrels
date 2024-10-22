@@ -12,6 +12,7 @@ public class PlayerController : Core
     public State runState;
     public State idleState;
     public State hurtState;
+    public State deathState;
     public Transform pocket;
 
     public LifeManager lifeManager;
@@ -30,13 +31,13 @@ public class PlayerController : Core
 
     private readonly float passthroughTime = 0.5f;
 
-    //temp
+
     private int playerMaxLife = 9;
 
     private bool isDead;
     private bool isCollectingCatnip;
 
-    public float ContactDirection {  get; private set; }
+    public float ContactDirection { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,8 @@ public class PlayerController : Core
     void Update()
     {
         IsItDeadYet();
-        if (state != hurtState) {
+        if (state != hurtState && state != deathState)
+        {
             GetInput();
             FaceInput();
             Move();
@@ -98,13 +100,13 @@ public class PlayerController : Core
 
     void Move()
     {
-        
+
         if (Mathf.Abs(xInput) > 0.01f)
         {
             rb.velocity = new Vector2(xInput * maxSpeed, rb.velocity.y);
         }
 
-        if (Input.GetAxisRaw("Jump") == 1 && groundSensor.isGrounded)
+        if (Input.GetButtonDown("Jump") && groundSensor.isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
@@ -121,7 +123,7 @@ public class PlayerController : Core
     {
         if (state.isComplete)
         {
-            if(state == hurtState)
+            if (state == hurtState)
             {
                 isHurt = false;
                 ContactDirection = 0;
@@ -143,11 +145,20 @@ public class PlayerController : Core
                     Set(airState);
             }
         }
-        
-        if (state != hurtState && isHurt)
+
+
+        if (state != deathState)
         {
-            Set(hurtState, true);
+            if (state != hurtState && isHurt)
+            {
+                Set(hurtState, true);
+            }
+            if (isDead)
+            {
+                Set(deathState, true);
+            }
         }
+
         state.DoBranch();
     }
 
@@ -203,7 +214,7 @@ public class PlayerController : Core
         isDead = lifeManager.IsOutOfLives();
     }
 
-   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject collisionGameObject = collision.gameObject;
