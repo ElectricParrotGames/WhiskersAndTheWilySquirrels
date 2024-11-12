@@ -9,6 +9,7 @@ public class GameMaster : MonoBehaviour
     public static GameMaster instance;
     private List<Transform> catnips = new List<Transform>();
     public int level { get; private set; } = 0;
+    public bool LevelDone { get; private set; }
 
     private void Awake()
     {
@@ -43,5 +44,15 @@ public class GameMaster : MonoBehaviour
     public List<Transform> GetAllCatnips()
     {
         return catnips;
+    }
+
+    public int GetTotalNumberCatnips()
+    {
+        return catnips.Count;
+    }
+
+    public void FinishLevel()
+    {
+        LevelDone = true;
     }
 }

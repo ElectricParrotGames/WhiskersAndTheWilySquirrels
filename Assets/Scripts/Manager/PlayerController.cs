@@ -13,6 +13,7 @@ public class PlayerController : Core
     public State idleState;
     public State hurtState;
     public State deathState;
+    public State levelDoneState;
     public Transform pocket;
 
     public LifeManager lifeManager;
@@ -34,8 +35,14 @@ public class PlayerController : Core
 
     private int playerMaxLife;
 
+    private int totalCatnipInLevel;
+    private bool bedInView;
+    private bool levelDone;
+
     private bool isDead;
     private bool isCollectingCatnip;
+    public LayerMask bedLayer;
+    private float rayLength = 0.001f;
 
     public float ContactDirection { get; private set; }
 
@@ -43,13 +50,15 @@ public class PlayerController : Core
     void Start()
     {
         playerMaxLife = PlayerData.instance.life;
+        totalCatnipInLevel = GameMaster.instance.GetTotalNumberCatnips();
+        Debug.Log(totalCatnipInLevel);
+
         lifeManager.SetStartingLife(playerMaxLife);
         maxSpeed = 1f;
         jumpSpeed = 3.5f;
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
 
         SetupInstances();
         machine.Set(idleState);
@@ -60,8 +69,9 @@ public class PlayerController : Core
     void Update()
     {
         IsItDeadYet();
-        if (state != hurtState && state != deathState)
+        if (state != hurtState && state != deathState && state != levelDoneState)
         {
+            CheckForBed();
             GetInput();
             FaceInput();
             Move();
@@ -70,6 +80,22 @@ public class PlayerController : Core
         SelectState();
 
 
+
+    }
+
+    private void CheckForBed()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(groundSensor.transform.position, Vector2.right, rayLength, bedLayer);
+        bedInView = hit.collider != null;
+
+        Vector2 endPoint = hit.collider ? (Vector2)hit.point : groundSensor.transform.position + Vector3.right * rayLength;
+        Debug.DrawLine(groundSensor.transform.position, endPoint, Color.gray);
+
+        if (bedInView && pocket.childCount == totalCatnipInLevel)
+        {
+            Debug.Log("Done");
+            levelDone = true;
+        }
     }
 
     private void CollectCatnip()
@@ -122,42 +148,49 @@ public class PlayerController : Core
 
     void SelectState()
     {
-        if (state.isComplete)
+        if (!levelDone)
         {
-            if (state == hurtState)
+            if (state.isComplete)
             {
-                isHurt = false;
-                ContactDirection = 0;
-            }
-            if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
-            {
-                if (xInput == 0)
+                if (state == hurtState)
                 {
-                    Set(idleState);
+                    isHurt = false;
+                    ContactDirection = 0;
+                }
+                if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
+                {
+                    if (xInput == 0)
+                    {
+                        Set(idleState);
+                    }
+                    else
+                    {
+                        Set(runState);
+                    }
                 }
                 else
                 {
-                    Set(runState);
+                    if (state != airState)
+                        Set(airState);
                 }
             }
-            else
+
+            if (state != deathState)
             {
-                if (state != airState)
-                    Set(airState);
+                if (state != hurtState && isHurt)
+                {
+                    Set(hurtState, true);
+                }
+                if (isDead)
+                {
+                    Set(deathState, true);
+                }
             }
+
         }
-
-
-        if (state != deathState)
+        else
         {
-            if (state != hurtState && isHurt)
-            {
-                Set(hurtState, true);
-            }
-            if (isDead)
-            {
-                Set(deathState, true);
-            }
+            Set(levelDoneState, true);
         }
 
         state.DoBranch();
