@@ -17,6 +17,7 @@ public class LevelDoneState : State
 
         if (info.IsName("Sleep") && info.normalizedTime >= 1.0f)
         {
+            PlayerData.instance.life = GetComponentInParent<PlayerController>().lifeManager.LifeTotal;
             GameMaster.instance.FinishLevel();
         }
     }
