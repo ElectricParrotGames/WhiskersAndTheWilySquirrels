@@ -22,6 +22,6 @@ MonoBehaviour:
   canAttack: 1
   minTimeBetweenAttack: 3
   canThrow: 1
-  throwMethod: 2
+  throwMethod: 0
   canChase: 0
   chaseSpeed: 0
