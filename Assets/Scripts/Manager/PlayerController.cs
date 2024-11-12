@@ -30,7 +30,7 @@ public class PlayerController : Core
 
     private readonly float yThreshold = 0.2f;
 
-    private readonly float passthroughTime = 0.5f;
+    private readonly float passthroughTime = 0.1f;
 
 
     private int playerMaxLife;

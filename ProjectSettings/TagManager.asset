@@ -12,6 +12,7 @@ TagManager:
   - HurtHitbox
   - Dirt
   - Bed
+  - Background
   layers:
   - Default
   - TransparentFX
