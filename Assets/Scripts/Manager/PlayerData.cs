@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     public static PlayerData instance;
-    public PlayerController controller;
     private int basePlayerTotalLife = 9;
     public int life;
 
