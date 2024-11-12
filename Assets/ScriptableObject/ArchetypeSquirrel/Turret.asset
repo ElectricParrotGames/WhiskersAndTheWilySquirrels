@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dbdfd4c2327f6438dea334ee86aa38, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  needBehaviour: 0
+  needBehaviour: 1
   canPatrol: 0
   patrolSpeed: 0
   canCollect: 0
   collectSpeed: 0
   canEat: 0
   canBury: 0
-  canAttack: 0
-  minTimeBetweenAttack: 0
-  canThrow: 0
-  throwMethod: 0
+  canAttack: 1
+  minTimeBetweenAttack: 3
+  canThrow: 1
+  throwMethod: 2
   canChase: 0
   chaseSpeed: 0

@@ -32,7 +32,7 @@ public class PlayerController : Core
     private readonly float passthroughTime = 0.5f;
 
 
-    private int playerMaxLife = 9;
+    private int playerMaxLife;
 
     private bool isDead;
     private bool isCollectingCatnip;
@@ -42,6 +42,7 @@ public class PlayerController : Core
     // Start is called before the first frame update
     void Start()
     {
+        playerMaxLife = PlayerData.instance.life;
         lifeManager.SetStartingLife(playerMaxLife);
         maxSpeed = 1f;
         jumpSpeed = 3.5f;

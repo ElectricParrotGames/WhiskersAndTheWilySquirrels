@@ -624,7 +624,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  playerViewDistance: 1.4
+  playerViewDistance: 1
   fovAngle: 60
 --- !u!114 &6948680300065014543
 MonoBehaviour:
