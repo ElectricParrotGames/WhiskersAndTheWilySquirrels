@@ -175,9 +175,13 @@ public class PlayerController : Core
                 }
                 else
                 {
-                    if (state != airState)
-                        Set(airState);
+                    Set(airState, true);
                 }
+            }
+
+            if (!groundSensor.isGrounded && state != hurtState)
+            {
+                Set(airState);
             }
 
             if (state != deathState)
@@ -265,8 +269,9 @@ public class PlayerController : Core
             if (collisionGameObject.GetComponent<CatnipScript>().CanBeTake)
             {
                 collision.transform.SetParent(pocket);
-                collisionGameObject.SetActive(false);
                 UIManager.instance.UpdateCatnipsNumber(pocket.childCount);
+                collisionGameObject.SetActive(false);
+
             }
 
 
@@ -280,6 +285,12 @@ public class PlayerController : Core
 
 
 
+        }
+        if (collisionGameObject.CompareTag("Lifish"))
+        {
+            lifeManager.GainLife(1);
+            UIManager.instance.UpdateLifeContainer(lifeManager.LifeTotal);
+            collisionGameObject.SetActive(false);
         }
     }
 

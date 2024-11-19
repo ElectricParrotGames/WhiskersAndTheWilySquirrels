@@ -9,11 +9,13 @@ public class UIManager : MonoBehaviour
     public TMP_Text textNumberCatnip;
     public TMP_Text textTotalNumberCatnip;
     public List<GameObject> lifeImages;
+    public GameObject gameOverPanel;
 
 
     private void Awake()
     {
         instance = this;
+        ActivateGameOverPanel(false);
     }
 
     public void UpdateCatnipsNumber(int catnipOnPlayer)
@@ -34,6 +36,11 @@ public class UIManager : MonoBehaviour
     {
         string textTotalCatnip = "/ " + GameMaster.instance.GetTotalNumberCatnips();
         textTotalNumberCatnip.SetText(textTotalCatnip);
+    }
+
+    public void ActivateGameOverPanel(bool isActive)
+    {
+        gameOverPanel.SetActive(isActive);
     }
 
 }

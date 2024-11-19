@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelNavigator : MonoBehaviour
 {
     public static LevelNavigator instance;
-
+    public GameObject gameOverScreen;
 
     private void Awake()
     {
@@ -42,6 +42,7 @@ public class LevelNavigator : MonoBehaviour
 
     public void ReloadScene()
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
