@@ -6,12 +6,13 @@ public class LifeManager : MonoBehaviour
 {
 
     public int LifeTotal { get; private set; }
+    public int MaxLife { get; private set; }
 
     public void SetStartingLife(int life) {
-        int maxLife = (int)GameSetting.LifeValue;
+        MaxLife = (int)GameSetting.LifeValue;
         if (life > GameSetting.LifeValue)
         {
-            life = maxLife;
+            life = MaxLife;
         }
 
         LifeTotal = life;

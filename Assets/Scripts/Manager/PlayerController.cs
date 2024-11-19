@@ -288,9 +288,13 @@ public class PlayerController : Core
         }
         if (collisionGameObject.CompareTag("Lifish"))
         {
-            lifeManager.GainLife(1);
-            UIManager.instance.UpdateLifeContainer(lifeManager.LifeTotal);
-            collisionGameObject.SetActive(false);
+            if(!(lifeManager.LifeTotal == lifeManager.MaxLife))
+            {
+                lifeManager.GainLife(1);
+                UIManager.instance.UpdateLifeContainer(lifeManager.LifeTotal);
+                collisionGameObject.SetActive(false);
+            }
+            
         }
     }
 
