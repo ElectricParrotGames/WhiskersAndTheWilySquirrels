@@ -8,6 +8,7 @@ public class PlayerData : MonoBehaviour
     private int basePlayerTotalLife = 9;
     public int life;
 
+
     private void Awake()
     {
         instance = this;

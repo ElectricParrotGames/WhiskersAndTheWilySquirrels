@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +27,22 @@ public class LevelNavigator : MonoBehaviour
 
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
+            SaveSystem.SaveGame(new SaveSystem.GameState(nextSceneIndex, PlayerData.instance.life));
             SceneManager.LoadScene(nextSceneIndex);
         }
+    }
+
+    public void LoadScene(int sceneIndex)
+    {
+        if(sceneIndex <= SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void OnEnable()

@@ -8,7 +8,13 @@ public class LifeManager : MonoBehaviour
     public int LifeTotal { get; private set; }
 
     public void SetStartingLife(int life) {
-    LifeTotal = life;
+        int maxLife = (int)GameSetting.LifeValue;
+        if (life > GameSetting.LifeValue)
+        {
+            life = maxLife;
+        }
+
+        LifeTotal = life;
     }
 
     public void TakeDamage(int damage)
