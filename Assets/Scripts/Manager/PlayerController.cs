@@ -63,6 +63,8 @@ public class PlayerController : Core
         SetupInstances();
         machine.Set(idleState);
 
+        UIManager.instance.UpdateLifeContainer(lifeManager.LifeTotal);
+        UIManager.instance.UpdateCatnipsNumber(pocket.childCount);
     }
 
     // Update is called once per frame
@@ -82,6 +84,8 @@ public class PlayerController : Core
 
 
     }
+
+
 
     private void CheckForBed()
     {
@@ -156,6 +160,7 @@ public class PlayerController : Core
                 {
                     isHurt = false;
                     ContactDirection = 0;
+                    UIManager.instance.UpdateCatnipsNumber(pocket.childCount);
                 }
                 if (groundSensor.isGrounded && rb.velocity.y <= yThreshold)
                 {
@@ -238,8 +243,8 @@ public class PlayerController : Core
         if (!isHurt)
         {
             lifeManager.TakeDamage(1);
+            UIManager.instance.UpdateLifeContainer(lifeManager.LifeTotal);
             isHurt = true;
-            Debug.Log(lifeManager.LifeTotal);
         }
     }
 
@@ -261,7 +266,7 @@ public class PlayerController : Core
             {
                 collision.transform.SetParent(pocket);
                 collisionGameObject.SetActive(false);
-
+                UIManager.instance.UpdateCatnipsNumber(pocket.childCount);
             }
 
 

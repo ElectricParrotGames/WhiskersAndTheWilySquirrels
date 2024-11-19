@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7520974799771582501}
   - component: {fileID: 1783108997034950521}
   - component: {fileID: 5442872474837064465}
+  - component: {fileID: 5007689670940918875}
+  - component: {fileID: 3718759298978458925}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -71,6 +73,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756e7945db4febd449729f037574dfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveIndex: 0
+  escapeMenu: {fileID: 0}
+  lifeContainer: {fileID: 0}
+  catnipContainer: {fileID: 0}
 --- !u!114 &5442872474837064465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,5 +89,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f79dd3880e8a240a7ec4f98d0a7523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   life: 0
+--- !u!114 &5007689670940918875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573319400171158613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4920af60622541642b48f2dd3f7735f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3718759298978458925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573319400171158613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa9a4f27ee47f7f4b9d86eebf988a176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textNumberCatnip: {fileID: 0}
+  lifeImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
