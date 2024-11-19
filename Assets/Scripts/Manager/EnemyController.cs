@@ -18,6 +18,7 @@ public class EnemyController : Core
 
     private void Awake()
     {
+        transform.SetParent(null);
         SetBehaviour();
     }
     // Start is called before the first frame update
