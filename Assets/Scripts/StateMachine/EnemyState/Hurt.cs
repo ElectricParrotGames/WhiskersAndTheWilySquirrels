@@ -5,12 +5,14 @@ using UnityEngine;
 public class Hurt : State
 {
     public GameObject mouth;
+    public ParticleSystem blood;
     private float timer = 0f;
     private readonly float timeBeforeDisapearing = 2f;
     private bool hasDisapear = false;
     public override void Enter()
     {
         anim.Play("Death");
+        blood.Play();
     }
 
     public override void Do()
