@@ -7,6 +7,7 @@ public class Throw : State
     public GameObject prefabAcorn;
     public Transform nutLauncher;
     public Transform target;
+    public AudioClip throwSound;
     private readonly float speed = 5;
     public ThrowMethod throwMethod = ThrowMethod.MIN_SPEED;
     
@@ -14,6 +15,7 @@ public class Throw : State
     {
         anim.Play("Attack");
         anim.speed = 1;
+        GameMaster.instance.src.PlayOneShot(throwSound);
         Shot();
     }
 

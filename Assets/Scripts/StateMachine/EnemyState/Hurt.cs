@@ -6,13 +6,18 @@ public class Hurt : State
 {
     public GameObject mouth;
     public ParticleSystem blood;
+    public AudioClip squishSound;
     private float timer = 0f;
     private readonly float timeBeforeDisapearing = 2f;
     private bool hasDisapear = false;
     public override void Enter()
     {
         anim.Play("Death");
-        blood.Play();
+        GameMaster.instance.src.PlayOneShot(squishSound);
+        if (GameSetting.HasParticule)
+        {
+            blood.Play();
+        }
     }
 
     public override void Do()
