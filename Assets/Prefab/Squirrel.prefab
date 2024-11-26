@@ -516,6 +516,7 @@ MonoBehaviour:
   prefabAcorn: {fileID: 2269874899657084983, guid: 077a7230a7d7ca0449340969acae8ff1, type: 3}
   nutLauncher: {fileID: 8620197018360435292}
   target: {fileID: 0}
+  throwSound: {fileID: 8300000, guid: 5596187cf60ce6344a713fa3226f845f, type: 3}
   throwMethod: 2
 --- !u!114 &8789167669396618549
 MonoBehaviour:
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouth: {fileID: 496754595504001150}
   blood: {fileID: 5994893100686823947}
+  squishSound: {fileID: 8300000, guid: 2f64128540e2a7840b8b3d75e9a4885c, type: 3}
 --- !u!1001 &2752886774681077924
 PrefabInstance:
   m_ObjectHideFlags: 0

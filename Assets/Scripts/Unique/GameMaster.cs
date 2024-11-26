@@ -12,6 +12,7 @@ public class GameMaster : MonoBehaviour
     public GameObject escapeMenu;
     public GameObject lifeContainer;
     public GameObject catnipContainer;
+    public AudioSource src;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class GameMaster : MonoBehaviour
         escapeMenu.SetActive(false);
         lifeContainer.SetActive(false);
         catnipContainer.SetActive(false);
+        src.Play();
     }
 
     public List<Transform> GetAllCatnips()
@@ -48,6 +50,7 @@ public class GameMaster : MonoBehaviour
             }
         }
 
+        src.volume = GameSetting.SoundVolume;
         UIManager.instance.SetTotalCatnipText();
     }
 
