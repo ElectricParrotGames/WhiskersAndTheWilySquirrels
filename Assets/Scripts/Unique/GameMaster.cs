@@ -56,7 +56,8 @@ public class GameMaster : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex > 1)
+        int buildScene = SceneManager.GetActiveScene().buildIndex;
+        if (buildScene > 1 && buildScene < 5)
         {
             if (!lifeContainer.activeInHierarchy || !catnipContainer.activeInHierarchy) 
             {
