@@ -31,7 +31,6 @@ public class SaveSystem : MonoBehaviour
 
             var serializedSave = JsonConvert.SerializeObject(gameSave);
             File.WriteAllText(path, serializedSave);
-            File.Delete(path);
         }
         
     }
